@@ -119,7 +119,7 @@ function App() {
                 <span className="badge skill-badge">Vite</span>
                 <span className="badge skill-badge">Bootstrap</span>
               </div>
-              <a href="hunkymanie.vercel.app" target="_blank" rel="noopener noreferrer" className="project-link">View Site</a>
+              <a href="https://hunkymanie.vercel.app" target="_blank" rel="noopener noreferrer" className="project-link">View Site</a>
             </div>
             <div className="project-card">
               <img src="https://source.unsplash.com/random/400x200?productivity,app" alt="Task Manager App Screenshot" className="project-img mb-3" />
