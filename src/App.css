@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Mono:wght@500&family=Space+Grotesk:wght@400;700&family=Roboto+Slab:wght@400;600&family=Pacifico&display=swap');
 
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   background: #18181b;
   min-height: 100vh;
@@ -650,19 +654,55 @@ a:hover {
 }
 
 @media (max-width: 600px) {
-  .homepage-hero {
-    min-height: 70vh;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 2vh;
+  #root {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+  }
+  .homepage-hero,
+  .about-section,
+  .projects-section,
+  .contact-section {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .about-section,
+  .projects-section,
+  .contact-section {
+    overflow-x: hidden;
+  }
+  .projects-list {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .about-text,
+  .about-skills-box,
+  .project-card,
+  .contact-info,
+  .contact-form {
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   .hero-name {
-    font-size: 2rem;
-  }
-  .nav-links {
-    flex-direction: column;
-    gap: 1.2rem;
+    font-size: 1.4rem;
+    text-align: left;
     width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    line-height: 1.15;
+    margin-left: 0;
+    margin-right: 0;
+    display: block;
   }
 }
 
