@@ -4,8 +4,10 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import portfolioImg from './assets/portfolio.png';
 import ovarianImg from './assets/ovarian.png';
+import { useState } from 'react';
 
 function PortfolioNavbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const handleNavClick = () => {
     const nav = document.getElementById('basic-navbar-nav');
     if (nav && nav.classList.contains('show')) {
@@ -18,15 +20,31 @@ function PortfolioNavbar() {
     <Navbar bg="dark" data-bs-theme="dark" expand="md" sticky="top">
       <Container>
         <Navbar.Brand href="#home">tobi.code</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? (
+            // X icon
+            <span style={{fontSize: 32, color: '#b983ff', lineHeight: 1}}>&#10005;</span>
+          ) : (
+            // Hamburger icon
+            <span style={{fontSize: 32, color: '#b983ff', lineHeight: 1}}>&#9776;</span>
+          )}
+        </Navbar.Toggle>
+        <Navbar.Collapse
+          id="basic-navbar-nav"
+          in={menuOpen}
+          onExited={() => setMenuOpen(false)}
+        >
           <Nav className="ms-auto">
-            <Nav.Link href="#home" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); handleNavClick(); }}>
+            <Nav.Link href="#home" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); handleNavClick(); setMenuOpen(false); }}>
               Home
             </Nav.Link>
-            <Nav.Link href="#about" onClick={e => { e.preventDefault(); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); handleNavClick(); }}>About</Nav.Link>
-            <Nav.Link href="#projects" onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); handleNavClick(); }}>Projects</Nav.Link>
-            <Nav.Link href="#contact" onClick={e => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); handleNavClick(); }}>Contact</Nav.Link>
+            <Nav.Link href="#about" onClick={e => { e.preventDefault(); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); handleNavClick(); setMenuOpen(false); }}>About</Nav.Link>
+            <Nav.Link href="#projects" onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); handleNavClick(); setMenuOpen(false); }}>Projects</Nav.Link>
+            <Nav.Link href="#contact" onClick={e => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); handleNavClick(); setMenuOpen(false); }}>Contact</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
