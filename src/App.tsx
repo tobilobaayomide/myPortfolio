@@ -2,6 +2,7 @@ import './App.css'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import bluepegImg from './assets/bluepeg.png';
 import portfolioImg from './assets/portfolio.png';
 import ovarianImg from './assets/ovarian.png';
 import { useState } from 'react';
@@ -114,11 +115,12 @@ function App() {
             <h4 className="mb-3">Key Skills</h4>
             <ul className="about-skills-list">
               <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="skill-icon" /> React</li>
+              <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" className="skill-icon" /> Next.js</li>
               <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" className="skill-icon" /> TypeScript</li>
               <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" className="skill-icon" /> JavaScript (ES6+)</li>
-              <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" className="skill-icon" /> HTML5</li>
-              <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" className="skill-icon" /> CSS3</li>
+              <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" className="skill-icon" /> Tailwind CSS</li>
               <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" alt="Bootstrap" className="skill-icon" /> Bootstrap</li>
+              <li><img src="https://vitejs.dev/logo.svg" alt="Vite" className="skill-icon" /> Vite</li>
               <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" className="skill-icon" /> Git & GitHub</li>
               <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" className="skill-icon" /> Python</li>
             </ul>
@@ -127,6 +129,18 @@ function App() {
         <section id="projects" className="section projects-section">
           <h2 className="projects-header">Projects</h2>
           <div className="projects-list">
+            <div className="project-card">
+              <img src={bluepegImg} alt="Bluepeg Industrial Operations Website Screenshot" className="project-img mb-3" />
+              <h5 style={{ textAlign: 'left' }}>Bluepeg Industrial Operations</h5>
+              <p style={{ textAlign: 'left' }}>A cutting-edge industrial operations company website showcasing automation solutions and engineering expertise. Features interactive technology showcase, seamless navigation, and modern industrial design.</p>
+              <div className="project-skills mb-2">
+                <span className="badge skill-badge">Next.js 15</span>
+                <span className="badge skill-badge">TypeScript</span>
+                <span className="badge skill-badge">Tailwind CSS</span>
+                <span className="badge skill-badge">React</span>
+              </div>
+              <a href="https://bluepeg.vercel.app" target="_blank" rel="noopener noreferrer" className="project-link">View Site</a> 
+            </div>
             <div className="project-card">
               <img src={portfolioImg} alt="Portfolio Website Screenshot" className="project-img mb-3" />
               <h5 style={{ textAlign: 'left' }}>Portfolio Website</h5>
@@ -138,17 +152,6 @@ function App() {
                 <span className="badge skill-badge">Bootstrap</span>
               </div>
               <a href="https://hunkymanie.vercel.app" target="_blank" rel="noopener noreferrer" className="project-link">View Site</a> 
-            </div>
-            <div className="project-card">
-              <img src="https://source.unsplash.com/random/400x200?productivity,app" alt="Task Manager App Screenshot" className="project-img mb-3" />
-              <h5 style={{ textAlign: 'left' }}>Task Manager App</h5>
-              <p style={{ textAlign: 'left' }}>A productivity app for managing daily tasks, built with React, Redux, and Bootstrap. Includes drag-and-drop, filtering, and persistent storage.</p>
-              <div className="project-skills mb-2">
-                <span className="badge skill-badge">React</span>
-                <span className="badge skill-badge">Redux</span>
-                <span className="badge skill-badge">Bootstrap</span>
-              </div>
-              <a href="https://your-taskmanager-app.com" target="_blank" rel="noopener noreferrer" className="project-link">View Site</a>
             </div>
             <div className="project-card">
               <img src={ovarianImg} alt="Ovarian Cancer Subtype Classifier Screenshot" className="project-img mb-3" />
