@@ -1,410 +1,481 @@
-import './App_new.css'
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import React, { useEffect, useState } from 'react';
+import './App.css';
 import bluepegImg from './assets/bluepeg.png';
-import portfolioImg from './assets/portfolio.png';
-import ovarianImg from './assets/ovarian.png';
-import { useState, useEffect } from 'react';
+import portfolioImg from './assets/ovarian.png';
+import ovarianImg from './assets/portfolio.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
-function PortfolioNavbar() {
+function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const handleNavClick = () => {
-    const nav = document.getElementById('basic-navbar-nav');
-    if (nav && nav.classList.contains('show')) {
-      // Bootstrap collapse expects a click on the toggler
-      const toggler = document.querySelector('.navbar-toggler') as HTMLElement | null;
-      if (toggler) toggler.click();
-    }
+
+  const navItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' }
+  ];
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [menuOpen]);
+
+  const handleNav = (id: string) => {
+    setMenuOpen(false);
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, menuOpen ? 400 : 0); // match overlay fade
   };
+
   return (
-    <Navbar bg="dark" data-bs-theme="dark" expand="md" sticky="top">
-      <Container>
-        <Navbar.Brand href="#home">tobi.code</Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-          onClick={() => setMenuOpen((open) => !open)}
+    <nav className={`navbar-modern${isScrolled ? ' scrolled' : ''}`}>
+      <div className="navbar-modern-inner">
+        <a href="#home" className="navbar-modern-brand" onClick={e => { e.preventDefault(); handleNav('home'); }}>tobi.dev</a>
+        <ul className="navbar-modern-links">
+          {navItems.map((item, idx) => (
+            <li key={item.id} style={{animationDelay: `${0.1 * idx}s`}} className="navbar-link-animate">
+              <a href={`#${item.id}`} onClick={e => { e.preventDefault(); handleNav(item.id); }}>{item.label}</a>
+            </li>
+          ))}
+        </ul>
+        <button
+          className={`navbar-modern-hamburger${menuOpen ? ' open' : ''}`}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(open => !open)}
         >
-          {menuOpen ? (
-            // X icon
-            <span style={{fontSize: 32, color: '#b983ff', lineHeight: 1}}>&#10005;</span>
-          ) : (
-            // Hamburger icon
-            <span style={{fontSize: 32, color: '#b983ff', lineHeight: 1}}>&#9776;</span>
-          )}
-        </Navbar.Toggle>
-        <Navbar.Collapse
-          id="basic-navbar-nav"
-          in={menuOpen}
-          onExited={() => setMenuOpen(false)}
-        >
-          <Nav className="ms-auto">
-            <Nav.Link href="#home" onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); handleNavClick(); setMenuOpen(false); }}>
-              Home
-            </Nav.Link>
-            <Nav.Link href="#about" onClick={e => { e.preventDefault(); document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); handleNavClick(); setMenuOpen(false); }}>About</Nav.Link>
-            <Nav.Link href="#projects" onClick={e => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); handleNavClick(); setMenuOpen(false); }}>Projects</Nav.Link>
-            <Nav.Link href="#contact" onClick={e => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); handleNavClick(); setMenuOpen(false); }}>Contact</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+          {!menuOpen && <span className="hamburger-icon">≡</span>}
+          {menuOpen && <span className="close-icon">×</span>}
+        </button>
+      </div>
+      {/* Overlay */}
+      {menuOpen && (
+        <div className="navbar-modern-overlay" aria-modal="true" role="dialog">
+          <ul className="navbar-modern-mobile-links">
+            {navItems.map(item => (
+              <li key={item.id}>
+                <a href={`#${item.id}`} onClick={e => { e.preventDefault(); handleNav(item.id); }}>{item.label}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </nav>
   );
 }
 
-function HomePage() {
+function HeroSection() {
   return (
-    <div className="hero-wrapper">
-      <div className="hero-background">
-        <div className="hero-particles"></div>
-        <div className="hero-gradient"></div>
-      </div>
-      <Container className="py-5 position-relative">
-        <div className="d-flex flex-column align-items-start text-start homepage-hero" data-aos="fade-up" data-aos-duration="800">
-          <div className="hero-badge mb-3" data-aos="fade-down" data-aos-delay="100">
-            <span className="badge-text">👋 Welcome to my portfolio</span>
-          </div>
-          <h2 className="mb-2 hero-hello" data-aos="fade-right" data-aos-delay="200">Hello, I'm</h2>
-          <h1 className="display-3 fw-bold mb-1 hero-name" data-aos="fade-right" data-aos-delay="400">
-            <span className="typing-effect">Tobiloba Ayomide</span>
-            <div className="hero-cursor"></div>
-          </h1>
-          <h3 className="mb-4 hero-title" data-aos="fade-right" data-aos-delay="600">
-            <span className="role-text">Frontend Developer</span>
-            <span className="role-accent"> & UI Designer</span>
-          </h3>
-          <p className="lead mb-5 hero-summary" data-aos="fade-up" data-aos-delay="800">
-            Creative and detail-oriented Frontend Developer with a passion for building 
-            <span className="text-highlight"> beautiful, user-friendly web experiences</span>. 
-            Experienced in React, TypeScript, and modern UI design. I love turning ideas into 
-            <span className="text-highlight"> interactive, accessible, and high-performance websites</span>.
-          </p>
-          <div className="hero-actions d-flex align-items-center gap-4 mb-5" data-aos="fade-up" data-aos-delay="1000">
-            <a
-              href="/resume.pdf"
-              className="btn btn-primary btn-lg hero-btn-primary"
-              download
-            >
-              <span>📄 Download Resume</span>
-            </a>
-            <a
-              href="#contact"
-              className="btn btn-outline-light btn-lg hero-btn-secondary"
-              onClick={e => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
-            >
-              <span>💬 Let's Talk</span>
-            </a>
-          </div>
-          <div className="hero-stats d-flex gap-4 mb-4" data-aos="fade-up" data-aos-delay="1200">
-            <div className="stat-item">
-              <div className="stat-number">15+</div>
-              <div className="stat-label">Projects Completed</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">3+</div>
-              <div className="stat-label">Years Experience</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">100%</div>
-              <div className="stat-label">Client Satisfaction</div>
-            </div>
-          </div>
-          <div className="hero-social d-flex align-items-center gap-3" data-aos="fade-up" data-aos-delay="1400">
-            <span className="social-label">Connect with me:</span>
-            <a href="https://github.com/hunkymanie" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="social-link-modern">
-              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 2.92-.39c.99 0 1.99.13 2.92.39 2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.7.42.36.79 1.09.79 2.2 0 1.59-.01 2.87-.01 3.26 0 .31.21.67.8.56C20.71 21.39 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"/></svg>
-            </a>
-            <a href="https://linkedin.com/in/tobiloba-ayomide-923628256" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-link-modern">
-              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-            <a href="https://twitter.com/hunkymanieee" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-link-modern">
-              <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-            </a>
-          </div>
+    <section id="home" className="hero">
+      <div className="hero-content" data-aos="fade-up" data-aos-duration="800">
+        <div className="hero-subtitle">Frontend Developer</div>
+        <h1 className="hero-title">
+          Hi, I'm <span className="highlight typing">Tobiloba Ayomide</span>
+        </h1>
+        <p className="hero-description">
+          I craft seamless digital experiences that bridge beautiful design with powerful functionality. 
+          Specializing in React, TypeScript, and cutting-edge web technologies to transform your vision into reality.
+        </p>
+        <div className="hero-cta">
+          <a href="#projects" className="btn btn-primary" onClick={(e) => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }}>
+            Explore My Projects
+          </a>
+          <a href="/resume.pdf" className="btn btn-outline" download>
+            Download Resume
+          </a>
         </div>
-      </Container>
-    </div>
+        <div className="hero-tech-stack" data-aos="fade-up" data-aos-delay="400">
+          <a href="https://github.com/hunkymanie" target="_blank" rel="noopener noreferrer" className="tech-icon" title="GitHub">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+          <a href="https://linkedin.com/in/tobiloba-ayomide-923628256" target="_blank" rel="noopener noreferrer" className="tech-icon" title="LinkedIn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+          <a href="https://twitter.com/hunkymanieee" target="_blank" rel="noopener noreferrer" className="tech-icon" title="Twitter">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function AboutSection() {
+  const stats = [
+    { number: '20+', label: 'Projects Delivered' },
+    { number: '3+', label: 'Years Building' },
+    { number: '100%', label: 'Client Satisfaction' }
+  ];
+
+  const skills = [
+    {
+      category: 'Frontend Development',
+      items: [
+        { name: 'React', level: 'Expert', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+        { name: 'TypeScript', level: 'Advanced', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+        { name: 'Next.js', level: 'Advanced', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' },
+        { name: 'JavaScript', level: 'Expert', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' }
+      ]
+    },
+    {
+      category: 'Styling & Design',
+      items: [
+        { name: 'Tailwind CSS', level: 'Advanced', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
+        { name: 'CSS3', level: 'Expert', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
+        { name: 'Sass', level: 'Advanced', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg' },
+        { name: 'Figma', level: 'Intermediate', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg' }
+      ]
+    },
+    {
+      category: 'Tools & Technologies',
+      items: [
+        { name: 'Git', level: 'Advanced', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+        { name: 'Vite', level: 'Advanced', icon: 'https://vitejs.dev/logo.svg' },
+        { name: 'Node.js', level: 'Intermediate', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+        { name: 'Python', level: 'Intermediate', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' }
+      ]
+    }
+  ];
+
+  return (
+    <section id="about" className="section about">
+      <div className="content-wrapper">
+        <div className="section-header" data-aos="fade-up">
+          <div className="section-subtitle">Get To Know Me</div>
+          <h2 className="section-title">
+            Building Tomorrow's <span className="highlight">Digital Experiences</span>
+          </h2>
+          <p className="section-description">
+            Computer Science graduate turned frontend developer, passionate about creating intuitive, 
+            scalable user interfaces that make a real impact. I blend technical expertise with creative vision 
+            to deliver exceptional results.
+          </p>
+        </div>
+
+        <div className="skills-grid">
+          {skills.map((category, index) => (
+            <div key={index} className="skill-category" data-aos="fade-up" data-aos-delay={300 + (index * 100)}>
+              <h4>{category.category}</h4>
+              {category.items.map((skill, skillIndex) => (
+                <div key={skillIndex} className="skill-item">
+                  <img src={skill.icon} alt={skill.name} className="skill-icon" />
+                  <div className="skill-info">
+                    <div className="skill-name">{skill.name}</div>
+                    <div className="skill-level">{skill.level}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProjectsSection() {
+  const projects = [
+    {
+      id: 1,
+      title: 'Bluepeg Industrial Solutions',
+      category: 'Industrial Web Platform',
+      description: 'Enterprise-grade website for industrial automation company featuring real-time data visualization, interactive service showcases, and seamless user experience across all devices.',
+      image: bluepegImg,
+      technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'React'],
+      liveUrl: 'https://bluepeg.vercel.app',
+      githubUrl: 'https://github.com/hunkymanie/bluepeg'
+    },
+    {
+      id: 2,
+      title: 'Modern Portfolio Website',
+      category: 'Personal Brand',
+      description: 'Responsive personal portfolio showcasing advanced React patterns, TypeScript implementation, and modern design principles. Features smooth animations and optimal performance.',
+      image: portfolioImg,
+      technologies: ['React', 'TypeScript', 'Vite', 'CSS3'],
+      liveUrl: 'https://hunkymanie.vercel.app',
+      githubUrl: 'https://github.com/hunkymanie/portfolio'
+    },
+    {
+      id: 3,
+      title: 'AI Cancer Detection System',
+      category: 'Machine Learning & Healthcare',
+      description: 'Advanced medical imaging tool utilizing Convolutional Neural Networks for automated ovarian cancer classification. Features real-time analysis and intuitive medical interface.',
+      image: ovarianImg,
+      technologies: ['Python', 'Streamlit', 'CNN', 'TensorFlow'],
+      liveUrl: '#',
+      githubUrl: 'https://github.com/hunkymanie'
+    }
+  ];
+
+  return (
+    <section id="projects" className="section projects">
+      <div className="content-wrapper">
+        <div className="section-header" data-aos="fade-up">
+          <div className="section-subtitle">My Work</div>
+          <h2 className="section-title">Featured Projects</h2>
+          <p className="section-description">
+            Each project represents a unique challenge solved with innovative thinking, clean code, 
+            and user-centered design. From enterprise solutions to creative experiments.
+          </p>
+        </div>
+
+        <div className="projects-grid">
+          {projects.map((project, index) => (
+            <div key={project.id} className="project-card" data-aos="fade-up" data-aos-delay={200 + (index * 100)}>
+              <img src={project.image} alt={project.title} className="project-image" />
+              <div className="project-content">
+                <div className="project-category">{project.category}</div>
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-description">{project.description}</p>
+                <div className="project-tech">
+                  {project.technologies.map((tech, techIndex) => (
+                    <span key={techIndex} className="tech-tag">{tech}</span>
+                  ))}
+                </div>
+                <div className="project-links">
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="project-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zM21 3v8h-2V6.413l-7.793 7.794-1.414-1.414L17.585 5H13V3h8z"/>
+                    </svg>
+                    Live Demo
+                  </a>
+                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="project-link">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    View Code
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Form submission logic here
+    console.log('Form submitted:', formData);
+  };
+
+  return (
+    <section id="contact" className="section contact">
+      <div className="content-wrapper">
+        <div className="section-header" data-aos="fade-up">
+          <div className="section-subtitle">Get In Touch</div>
+          <h2 className="section-title">Let's Create Something Amazing</h2>
+          <p className="section-description">
+            Ready to turn your ideas into digital reality? I'm always excited to discuss new projects, 
+            creative collaborations, or innovative solutions. Let's build something extraordinary together.
+          </p>
+        </div>
+
+        <div className="contact-grid">
+          <div className="contact-info" data-aos="fade-right" data-aos-delay="200">
+            <div className="contact-item">
+              <div className="contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4.7l-8 5.334L4 8.7V6.297l8 5.333 8-5.333V8.7z"/>
+                </svg>
+              </div>
+              <div className="contact-details">
+                <h4>Email</h4>
+                <p><a href="mailto:oyetunjitobiloba82@gmail.com">oyetunjitobiloba82@gmail.com</a></p>
+              </div>
+            </div>
+            <div className="contact-item">
+              <div className="contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                </svg>
+              </div>
+              <div className="contact-details">
+                <h4>Phone</h4>
+                <p><a href="tel:+2349079843907">+234 907 984 3907</a></p>
+              </div>
+            </div>
+            <div className="contact-item">
+              <div className="contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                </svg>
+              </div>
+              <div className="contact-details">
+                <h4>Location</h4>
+                <p>Lagos, Nigeria</p>
+              </div>
+            </div>
+            <div className="contact-item">
+              <div className="contact-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"/>
+                  <path d="M13 7h-2v5.414l3.293 3.293 1.414-1.414L13 11.586z"/>
+                </svg>
+              </div>
+              <div className="contact-details">
+                <h4>Response Time</h4>
+                <p>Within 24 hours</p>
+              </div>
+            </div>
+          </div>
+
+          <form className="contact-form" onSubmit={handleSubmit} data-aos="fade-left" data-aos-delay="300">
+            <div className="form-group">
+              <label htmlFor="name" className="form-label">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                className="form-control"
+                placeholder="What's your name?"
+                value={formData.name}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">Email Address</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                className="form-control"
+                placeholder="your@email.com"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="message" className="form-label">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                className="form-control"
+                placeholder="Share your project ideas, collaboration opportunities, or just say hello! I'd love to hear from you."
+                value={formData.message}
+                onChange={handleInputChange}
+                required
+              ></textarea>
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Let's Connect
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  const socialLinks = [
+    { 
+      name: 'GitHub', 
+      url: 'https://github.com/hunkymanie', 
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      )
+    },
+    { 
+      name: 'LinkedIn', 
+      url: 'https://linkedin.com/in/tobiloba-ayomide-923628256', 
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      )
+    },
+    { 
+      name: 'Twitter', 
+      url: 'https://twitter.com/hunkymanieee', 
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+        </svg>
+      )
+    }
+  ];
+
+  return (
+    <footer className="footer">
+      <div className="content-wrapper">
+        <div className="social-links">
+          {socialLinks.map((link, index) => (
+            <a
+              key={index}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="social-link"
+              aria-label={link.name}
+            >
+              {link.icon}
+            </a>
+          ))}
+        </div>
+        <div className="copyright">
+          © {new Date().getFullYear()} Tobiloba Ayomide. All rights reserved.
+        </div>
+      </div>
+    </footer>
   );
 }
 
 function App() {
   useEffect(() => {
     AOS.init({
-      duration: 1000,
-      easing: 'ease-out-cubic',
-      offset: 120,
-      delay: 100,
+      duration: 800,
+      easing: 'ease-out-quart',
+      offset: 100,
+      once: true
     });
   }, []);
 
   return (
-    <>
-      <PortfolioNavbar />
-      <main>
-        <HomePage />
-        <section id="about" className="section about-section modern-section" data-aos="fade-up">
-          <Container>
-            <div className="section-header text-center mb-5" data-aos="fade-up" data-aos-delay="200">
-              <h2 className="section-title">About Me</h2>
-              <p className="section-subtitle">Passionate about creating digital experiences</p>
-            </div>
-            <div className="row align-items-center">
-              <div className="col-lg-6 about-content" data-aos="fade-right" data-aos-delay="300">
-                <div className="about-card">
-                  <h3 className="about-card-title">My Journey</h3>
-                  <p className="about-text">
-                    I'm a passionate <strong>Frontend Developer</strong> and Computer Science graduate with a strong foundation in both web technologies and machine learning. My expertise spans building beautiful, performant user interfaces, as well as applying data-driven solutions using modern ML frameworks.
-                  </p>
-                  <p className="about-text">
-                    My experience includes developing <em>responsive web applications</em>, optimizing performance, and ensuring accessibility for all users. I'm eager to learn new technologies and tackle challenging web projects.
-                  </p>
-                  <div className="about-highlights">
-                    <div className="highlight-item">
-                      <span className="highlight-icon">🎯</span>
-                      <span>Goal-oriented problem solver</span>
-                    </div>
-                    <div className="highlight-item">
-                      <span className="highlight-icon">🚀</span>
-                      <span>Performance optimization enthusiast</span>
-                    </div>
-                    <div className="highlight-item">
-                      <span className="highlight-icon">♿</span>
-                      <span>Accessibility advocate</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-lg-6 about-skills-box" data-aos="fade-left" data-aos-delay="400">
-                <div className="skills-card">
-                  <h4 className="skills-title">Technical Expertise</h4>
-                  <div className="skills-container">
-                    <div className="skill-item" data-aos="fade-up" data-aos-delay="500">
-                      <div className="skill-header">
-                        <div className="skill-info">
-                          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="skill-icon" />
-                          <span className="skill-name">React</span>
-                        </div>
-                        <span className="skill-percentage">90%</span>
-                      </div>
-                      <div className="skill-progress">
-                        <div className="skill-progress-bar" style={{width: '90%'}} data-aos="slide-right" data-aos-delay="600"></div>
-                      </div>
-                    </div>
-                    <div className="skill-item" data-aos="fade-up" data-aos-delay="600">
-                      <div className="skill-header">
-                        <div className="skill-info">
-                          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js" className="skill-icon" />
-                          <span className="skill-name">Next.js</span>
-                        </div>
-                        <span className="skill-percentage">85%</span>
-                      </div>
-                      <div className="skill-progress">
-                        <div className="skill-progress-bar" style={{width: '85%'}} data-aos="slide-right" data-aos-delay="700"></div>
-                      </div>
-                    </div>
-                    <div className="skill-item" data-aos="fade-up" data-aos-delay="700">
-                      <div className="skill-header">
-                        <div className="skill-info">
-                          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" className="skill-icon" />
-                          <span className="skill-name">TypeScript</span>
-                        </div>
-                        <span className="skill-percentage">80%</span>
-                      </div>
-                      <div className="skill-progress">
-                        <div className="skill-progress-bar" style={{width: '80%'}} data-aos="slide-right" data-aos-delay="800"></div>
-                      </div>
-                    </div>
-                    <div className="skill-item" data-aos="fade-up" data-aos-delay="800">
-                      <div className="skill-header">
-                        <div className="skill-info">
-                          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" className="skill-icon" />
-                          <span className="skill-name">JavaScript (ES6+)</span>
-                        </div>
-                        <span className="skill-percentage">88%</span>
-                      </div>
-                      <div className="skill-progress">
-                        <div className="skill-progress-bar" style={{width: '88%'}} data-aos="slide-right" data-aos-delay="900"></div>
-                      </div>
-                    </div>
-                    <div className="skill-item" data-aos="fade-up" data-aos-delay="900">
-                      <div className="skill-header">
-                        <div className="skill-info">
-                          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS" className="skill-icon" />
-                          <span className="skill-name">Tailwind CSS</span>
-                        </div>
-                        <span className="skill-percentage">85%</span>
-                      </div>
-                      <div className="skill-progress">
-                        <div className="skill-progress-bar" style={{width: '85%'}} data-aos="slide-right" data-aos-delay="1000"></div>
-                      </div>
-                    </div>
-                    <div className="skill-item" data-aos="fade-up" data-aos-delay="1000">
-                      <div className="skill-header">
-                        <div className="skill-info">
-                          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" className="skill-icon" />
-                          <span className="skill-name">Python</span>
-                        </div>
-                        <span className="skill-percentage">75%</span>
-                      </div>
-                      <div className="skill-progress">
-                        <div className="skill-progress-bar" style={{width: '75%'}} data-aos="slide-right" data-aos-delay="1100"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Container>
-        </section>
-        <section id="projects" className="section projects-section modern-section" data-aos="fade-up">
-          <Container>
-            <div className="section-header text-center mb-5" data-aos="fade-up" data-aos-delay="200">
-              <h2 className="section-title">Featured Projects</h2>
-              <p className="section-subtitle">Showcasing my latest work and technical expertise</p>
-            </div>
-            <div className="projects-grid">
-              <div className="project-card modern-card" data-aos="fade-up" data-aos-delay="300">
-                <div className="project-image-wrapper">
-                  <img src={bluepegImg} alt="Bluepeg Industrial Operations Website Screenshot" className="project-img" />
-                  <div className="project-overlay">
-                    <div className="project-links">
-                      <a href="https://bluepeg.vercel.app" target="_blank" rel="noopener noreferrer" className="project-link-btn">
-                        <span>👁️ Live Demo</span>
-                      </a>
-                      <a href="https://github.com/hunkymanie/bluepeg" target="_blank" rel="noopener noreferrer" className="project-link-btn">
-                        <span>💻 View Code</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="project-content">
-                  <div className="project-category">🏭 Industrial Web App</div>
-                  <h3 className="project-title">Bluepeg Industrial Operations</h3>
-                  <p className="project-description">
-                    A cutting-edge industrial operations company website showcasing automation solutions and engineering expertise. Features interactive technology showcase, seamless navigation, and modern industrial design.
-                  </p>
-                  <div className="project-tech-stack">
-                    <span className="tech-tag">Next.js 15</span>
-                    <span className="tech-tag">TypeScript</span>
-                    <span className="tech-tag">Tailwind CSS</span>
-                    <span className="tech-tag">React</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="project-card modern-card" data-aos="fade-up" data-aos-delay="400">
-                <div className="project-image-wrapper">
-                  <img src={portfolioImg} alt="Portfolio Website Screenshot" className="project-img" />
-                  <div className="project-overlay">
-                    <div className="project-links">
-                      <a href="https://hunkymanie.vercel.app" target="_blank" rel="noopener noreferrer" className="project-link-btn">
-                        <span>👁️ Live Demo</span>
-                      </a>
-                      <a href="https://github.com/hunkymanie/portfolio" target="_blank" rel="noopener noreferrer" className="project-link-btn">
-                        <span>💻 View Code</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="project-content">
-                  <div className="project-category">💼 Personal Portfolio</div>
-                  <h3 className="project-title">Portfolio Website</h3>
-                  <p className="project-description">
-                    A modern, responsive personal portfolio built with React, TypeScript, and Vite. Features smooth navigation, custom theming, and accessibility best practices with beautiful animations.
-                  </p>
-                  <div className="project-tech-stack">
-                    <span className="tech-tag">React</span>
-                    <span className="tech-tag">TypeScript</span>
-                    <span className="tech-tag">Vite</span>
-                    <span className="tech-tag">Bootstrap</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="project-card modern-card" data-aos="fade-up" data-aos-delay="500">
-                <div className="project-image-wrapper">
-                  <img src={ovarianImg} alt="Ovarian Cancer Subtype Classifier Screenshot" className="project-img" />
-                  <div className="project-overlay">
-                    <div className="project-links">
-                      <a href="#" target="_blank" rel="noopener noreferrer" className="project-link-btn">
-                        <span>👁️ Live Demo</span>
-                      </a>
-                      <a href="https://github.com/hunkymanie" target="_blank" rel="noopener noreferrer" className="project-link-btn">
-                        <span>💻 View Code</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="project-content">
-                  <div className="project-category">🔬 Machine Learning</div>
-                  <h3 className="project-title">Ovarian Cancer Classifier</h3>
-                  <p className="project-description">
-                    A web-based tool for classifying ovarian cancer subtypes from histopathology images using Convolutional Neural Networks. Features interactive model predictions and data visualization.
-                  </p>
-                  <div className="project-tech-stack">
-                    <span className="tech-tag">Python</span>
-                    <span className="tech-tag">CNN</span>
-                    <span className="tech-tag">Streamlit</span>
-                    <span className="tech-tag">TensorFlow</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Container>
-        </section>
-        <section id="contact" className="section contact-section" data-aos="fade-up">
-          <h2 className="contact-header" data-aos="fade-up" data-aos-delay="200">Contact</h2>
-          <div className="contact-flex">
-            <div className="contact-info" data-aos="fade-right" data-aos-delay="300">
-              <p className="contact-text mb-4">
-                Interested in working together or have a question? Feel free to reach out!
-              </p>
-              <ul className="contact-list mb-4">
-                <li><strong>Email:</strong> <a href="mailto:oyetunjitobiloba82@gmail.com" className="contact-link">oyetunjitobiloba82@gmail.com</a></li>
-                <li><strong>Phone:</strong> <a href="tel:+2349079843907" className="contact-link">+234 907 9843 907</a></li>
-                <li className="contact-socials">
-                  <a href="https://linkedin.com/in/tobiloba-ayomide-923628256" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="social-link ms-2">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#fff"/><path d="M6.94 8.5C7.62 8.5 8.19 7.93 8.19 7.25C8.19 6.57 7.62 6 6.94 6C6.26 6 5.69 6.57 5.69 7.25C5.69 7.93 6.26 8.5 6.94 8.5ZM7.99 10.25H5.89V18H7.99V10.25ZM10.89 10.25H8.89V18H10.89V14.25C10.89 13.01 11.89 12 13.13 12C14.37 12 15.13 12.76 15.13 14.25V18H17.13V13.75C17.13 11.75 15.88 10.25 13.88 10.25C12.88 10.25 12.13 10.75 11.89 11.25H11.87V10.25H10.89Z" fill="#18181b"/></svg>
-                  </a>
-                  <a href="https://github.com/hunkymanie" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="social-link ms-2">
-                    <svg width="28" height="28" fill="#fff" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .98-.31 3.2 1.18a11.1 11.1 0 0 1 2.92-.39c.99 0 1.99.13 2.92.39 2.22-1.49 3.2-1.18 3.2-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.7.42.36.79 1.09.79 2.2 0 1.59-.01 2.87-.01 3.26 0 .31.21.67.8.56C20.71 21.39 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"/></svg>
-                  </a>
-                  <a href="https://twitter.com/hunkymanieee" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="social-link ms-2">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#fff"/><path d="M19.633 7.997c.013.176.013.353.013.53 0 5.39-4.104 11.61-11.61 11.61v-.003A11.54 11.54 0 0 1 2 18.13c.243.028.487.042.73.043a8.18 8.18 0 0 0 5.077-1.75 4.09 4.09 0 0 1-3.82-2.84c.246.047.497.072.75.073.366 0 .723-.048 1.065-.14a4.087 4.087 0 0 1-3.277-4.01v-.052a4.07 4.07 0 0 0 1.85.522 4.09 4.09 0 0 1-1.264-5.454 11.6 11.6 0 0 0 8.42 4.27 4.09 4.09 0 0 1 6.963-3.73 8.18 8.18 0 0 0 2.59-.988 4.1 4.1 0 0 1-1.797 2.26 8.19 8.19 0 0 0 2.35-.643 8.78 8.78 0 0 1-2.045 2.12z" fill="#18181b"/></svg>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <form className="contact-form enhanced-form" action="https://formsubmit.co/oyetunjitobiloba82@gmail.com" method="POST" data-aos="fade-left" data-aos-delay="400">
-              <div className="mb-3">
-                <label htmlFor="name" className="form-label">Name</label>
-                <input type="text" className="form-control enhanced-input" id="name" name="name" placeholder="Your Name" required />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input type="email" className="form-control enhanced-input" id="email" name="email" placeholder="you@email.com" required />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="message" className="form-label">Message</label>
-                <textarea className="form-control enhanced-input" id="message" name="message" rows={4} placeholder="Tell me about your project or just say hello!" required></textarea>
-              </div>
-              <button type="submit" className="btn btn-primary enhanced-button">Send Message</button>
-              <input type="hidden" name="_next" value="https://hunkymanie.vercel.app/#contact" />
-              <input type="hidden" name="_subject" value="New Portfolio Contact!" />
-            </form>
-          </div>
-        </section>
-        <footer className="site-footer mt-5 py-4" data-aos="fade-up">
-          <div style={{ textAlign: 'center', color: '#b983ff', fontFamily: 'Space Grotesk, Inter, Arial, sans-serif', fontWeight: 600, fontSize: '1.08rem', letterSpacing: '0.04em' }}>
-            © {new Date().getFullYear()} Tobiloba Ayomide
-          </div>
-        </footer>
-      </main>
-    </>
+    <div className="App">
+      <Navbar />
+      <HeroSection />
+      <AboutSection />
+      <ProjectsSection />
+      <ContactSection />
+      <Footer />
+    </div>
   );
 }
 
-export default App
+export default App;
