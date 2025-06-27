@@ -167,6 +167,15 @@ function AboutSection() {
           </p>
         </div>
 
+        <div className="stats-grid" data-aos="fade-up" data-aos-delay="200">
+          {stats.map((stat, index) => (
+            <div key={index} className="stat-item">
+              <div className="stat-number">{stat.number}</div>
+              <div className="stat-label">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+
         <div className="skills-grid">
           {skills.map((category, index) => (
             <div key={index} className="skill-category" data-aos="fade-up" data-aos-delay={300 + (index * 100)}>
