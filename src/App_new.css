@@ -107,10 +107,9 @@ p {
 
 /* Modern Professional Navbar */
 .navbar {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: #fff !important;
+  box-shadow: 0 2px 16px rgba(102, 126, 234, 0.08);
+  border-bottom: 1.5px solid #e2e8f0;
   position: fixed;
   top: 0;
   left: 0;
@@ -118,7 +117,6 @@ p {
   width: 100%;
   z-index: 1000;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 20px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-scrolled {
@@ -1429,9 +1427,8 @@ textarea.form-control {
   left: 0;
   width: 100vw;
   z-index: 1000;
-  background: rgba(255,255,255,0.97);
-  backdrop-filter: blur(16px) saturate(160%);
-  box-shadow: 0 8px 32px 0 rgba(30, 41, 59, 0.10);
+  background: #fff !important;
+  box-shadow: 0 2px 16px rgba(102, 126, 234, 0.08);
   border-bottom: 1.5px solid #e2e8f0;
   transition: background 0.3s, box-shadow 0.3s;
 }
@@ -1447,30 +1444,28 @@ textarea.form-control {
   justify-content: space-between;
   height: 64px;
   padding: 0 2rem;
+  background: transparent;
 }
 .navbar-modern-brand {
   font-family: 'Pacifico', 'JetBrains Mono', cursive, monospace;
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--primary) !important;
   letter-spacing: 0.08em;
   text-decoration: none;
   transition: color 0.2s, transform 0.25s cubic-bezier(.4,2,.3,1), text-shadow 0.3s;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 4px 24px rgba(102, 126, 234, 0.18), 0 1px 8px #764ba288;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  text-shadow: none;
   letter-spacing: 0.12em;
 }
 .navbar-modern-brand:hover {
-  color: var(--primary-dark);
-  transform: scale(1.09) translateY(-2px) rotate(-2deg);
-  text-shadow: 0 8px 32px #667eea33, 0 2px 12px #764ba288;
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary-dark) !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  text-shadow: none;
 }
 .navbar-modern-links {
   display: flex;
@@ -1480,39 +1475,40 @@ textarea.form-control {
   padding: 0;
 }
 .navbar-modern-links a {
-  color: var(--primary);
+  color: var(--primary) !important;
   font-size: 1.1rem;
   font-weight: 500;
   text-decoration: none;
   letter-spacing: 0.2px;
   position: relative;
   transition: color 0.2s, transform 0.25s cubic-bezier(.4,2,.3,1), text-shadow 0.3s, background 0.3s;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  text-shadow: none;
 }
 .navbar-modern-links a::after {
   content: '';
   display: block;
   height: 2px;
   width: 0;
-  background: #fff;
+  background: var(--primary);
   border-radius: 2px;
   transition: width 0.3s;
   position: absolute;
   left: 0;
   bottom: -4px;
+  opacity: 0.18;
 }
 .navbar-modern-links a:hover,
 .navbar-modern-links a:focus {
-  color: var(--primary-dark);
+  color: var(--primary-dark) !important;
   transform: scale(1.13) translateY(-2px) rotate(-2deg);
-  text-shadow: 0 8px 32px #667eea33, 0 2px 12px #764ba288;
-  background: linear-gradient(225deg, #764ba2 0%, #667eea 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  text-shadow: none;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  text-shadow: none;
   transition: all 0.25s cubic-bezier(.4,2,.3,1);
   position: relative;
 }
@@ -1544,9 +1540,9 @@ textarea.form-control {
   transition: transform 0.2s;
   font-family: 'Pacifico', cursive;
   font-size: 2.5rem;
-  color: var(--primary-dark);
+  color: var(--primary) !important;
   background: none;
-  text-shadow: 0 4px 24px rgba(102, 126, 234, 0.18), 0 1px 8px #764ba288;
+  text-shadow: none;
   line-height: 1;
 }
 .navbar-modern-hamburger.open {
@@ -1574,7 +1570,7 @@ textarea.form-control {
   top: 0; left: 0; right: 0; bottom: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(255,255,255,0.98);
+  background: #fff !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1605,12 +1601,11 @@ textarea.form-control {
   display: block;
   font-family: 'Pacifico', cursive;
   font-size: 2.5rem;
-  color: var(--primary-dark) !important;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 4px 24px rgba(102, 126, 234, 0.18), 0 1px 8px #764ba288;
+  color: var(--primary) !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  text-shadow: none;
   stroke: none;
   box-sizing: content-box;
   padding: 0;
@@ -1637,26 +1632,26 @@ textarea.form-control {
   align-items: center;
 }
 .navbar-modern-mobile-links a {
-  color: var(--primary);
+  color: var(--primary) !important;
   font-size: 2.2rem;
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 1px;
   transition: color 0.2s, transform 0.25s cubic-bezier(.4,2,.3,1), text-shadow 0.3s, background 0.3s;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  text-shadow: none;
 }
 .navbar-modern-mobile-links a:hover,
 .navbar-modern-mobile-links a:focus {
-  color: var(--primary-dark);
+  color: var(--primary-dark) !important;
   transform: scale(1.13) translateY(-2px) rotate(-2deg);
-  text-shadow: 0 8px 32px #667eea33, 0 2px 12px #764ba288;
-  background: linear-gradient(225deg, #764ba2 0%, #667eea 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  text-shadow: none;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  text-shadow: none;
   transition: all 0.25s cubic-bezier(.4,2,.3,1);
   position: relative;
 }
