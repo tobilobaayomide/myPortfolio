@@ -116,12 +116,6 @@ function HeroSection() {
 }
 
 function AboutSection() {
-  const stats = [
-    { number: '20+', label: 'Projects Delivered' },
-    { number: '3+', label: 'Years Building' },
-    { number: '100%', label: 'Client Satisfaction' }
-  ];
-
   const skills = [
     {
       category: 'Frontend Development',
@@ -165,15 +159,6 @@ function AboutSection() {
             scalable user interfaces that make a real impact. I blend technical expertise with creative vision 
             to deliver exceptional results.
           </p>
-        </div>
-
-        <div className="stats-grid" data-aos="fade-up" data-aos-delay="200">
-          {stats.map((stat, index) => (
-            <div key={index} className="stat-item">
-              <div className="stat-number">{stat.number}</div>
-              <div className="stat-label">{stat.label}</div>
-            </div>
-          ))}
         </div>
 
         <div className="skills-grid">
