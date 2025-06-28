@@ -3,6 +3,7 @@ import './App.css';
 import bluepegImg from './assets/bluepeg.png';
 import portfolioImg from './assets/porfolio.png';
 import ovarianImg from './assets/ovarian.png';
+import flowlendImg from './assets/FlowLend.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -74,16 +75,38 @@ function Navbar() {
 }
 
 function HeroSection() {
+  const [currentRole, setCurrentRole] = useState('Frontend Developer');
+  
+  const roles = [
+    'Frontend Developer',
+    'Solidity Engineer',
+    'Blockchain Developer'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentRole(prev => {
+        const currentIndex = roles.indexOf(prev);
+        const nextIndex = (currentIndex + 1) % roles.length;
+        return roles[nextIndex];
+      });
+    }, 3000); // Change every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section id="home" className="hero">
       <div className="hero-content" data-aos="fade-up" data-aos-duration="800">
-        <div className="hero-subtitle">Frontend Developer</div>
+        <div className="hero-subtitle">
+          <span className="role-rotator">{currentRole}</span>
+        </div>
         <h1 className="hero-title">
           Hi, I'm <span className="highlight typing">Tobiloba Ayomide</span>
         </h1>
         <p className="hero-description">
           I craft seamless digital experiences that bridge beautiful design with powerful functionality. 
-          Specializing in React, TypeScript, and cutting-edge web technologies to transform your vision into reality.
+          Specializing in React, TypeScript, Solidity, and cutting-edge web technologies to transform your vision into reality.
         </p>
         <div className="hero-cta">
           <a href="#projects" className="btn btn-primary" onClick={(e) => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }}>
@@ -127,6 +150,15 @@ function AboutSection() {
       ]
     },
     {
+      category: 'Blockchain & Web3',
+      items: [
+        { name: 'Solidity', level: 'Advanced', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/solidity/solidity-original.svg' },
+        { name: 'Hardhat', level: 'Advanced', icon: 'https://hardhat.org/favicon.ico' },
+        { name: 'Ethers.js', level: 'Advanced', icon: 'https://docs.ethers.io/v5/static/logo.svg' },
+        { name: 'Web3', level: 'Advanced', icon: 'https://avatars.githubusercontent.com/u/6250754?s=200&v=4' }
+      ]
+    },
+    {
       category: 'Styling & Design',
       items: [
         { name: 'Tailwind CSS', level: 'Advanced', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
@@ -154,10 +186,18 @@ function AboutSection() {
           <h2 className="section-title">
             Building Tomorrow's <span className="highlight">Digital Experiences</span>
           </h2>
-          <p className="section-description">
-            Computer Science graduate turned frontend developer, passionate about creating intuitive, 
-            scalable user interfaces that make a real impact. I blend technical expertise with creative vision 
-            to deliver exceptional results.
+          <p className="section-description" 
+             onMouseEnter={(e) => e.currentTarget.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'}
+             onMouseLeave={(e) => e.currentTarget.style.background = ''}
+             style={{
+               transition: 'all 0.3s ease',
+               borderRadius: '8px',
+               padding: '1rem',
+               cursor: 'pointer'
+             }}>
+            Frontend developer with expertise in modern React development and blockchain smart contract programming. 
+            I create beautiful, responsive user interfaces while building secure Solidity protocols and DeFi solutions. 
+            From interactive web applications to decentralized lending platforms, I bridge design and blockchain technology.
           </p>
         </div>
 
@@ -186,6 +226,16 @@ function ProjectsSection() {
   const projects = [
     {
       id: 1,
+      title: 'FlowLend DeFi Platform',
+      category: 'Blockchain & DeFi',
+      description: 'Revolutionary decentralized lending platform built on Ethereum. Enables users to lend crypto assets for competitive yields and borrow with over-collateralized loans. Features smart contract automation, wallet integration, and real-time analytics.',
+      image: flowlendImg,
+      technologies: ['Next.js 15', 'TypeScript', 'Solidity', 'Hardhat', 'Tailwind CSS', 'Wagmi', 'Ethers.js'],
+      liveUrl: 'https://flow-lend.vercel.app',
+      githubUrl: 'https://github.com/hunkymanie/FlowLend'
+    },
+    {
+      id: 2,
       title: 'Bluepeg Industrial Solutions',
       category: 'Industrial Web Platform',
       description: 'Enterprise-grade website for industrial automation company featuring real-time data visualization, interactive service showcases, and seamless user experience across all devices.',
@@ -195,7 +245,7 @@ function ProjectsSection() {
       githubUrl: 'https://github.com/hunkymanie/bluepeg-'
     },
     {
-      id: 2,
+      id: 3,
       title: 'Modern Portfolio Website',
       category: 'Personal Brand',
       description: 'Responsive personal portfolio showcasing advanced React patterns, TypeScript implementation, and modern design principles. Features smooth animations and optimal performance.',
@@ -205,7 +255,7 @@ function ProjectsSection() {
       githubUrl: 'https://github.com/hunkymanie/portfolio'
     },
     {
-      id: 3,
+      id: 4,
       title: 'AI Cancer Detection System',
       category: 'Machine Learning & Healthcare',
       description: 'Academic research project utilizing Convolutional Neural Networks for automated ovarian cancer classification. Includes comprehensive documentation, model analysis, and installation instructions.',

@@ -558,6 +558,25 @@ p {
   display: inline-block;
 }
 
+.role-rotator {
+  display: inline-block;
+  transition: all 0.5s ease-in-out;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .hero-subtitle::before,
 .hero-subtitle::after {
   content: '';
