@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import bluepegImg from './assets/bluepeg.png';
 import portfolioImg from './assets/porfolio.png';
@@ -278,25 +278,6 @@ function ProjectsSection() {
 }
 
 function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Form submission logic here
-    console.log('Form submitted:', formData);
-  };
-
   return (
     <section id="contact" className="section contact">
       <div className="content-wrapper">
@@ -358,7 +339,11 @@ function ContactSection() {
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit} data-aos="fade-left" data-aos-delay="300">
+          <form className="contact-form" action="https://formsubmit.co/oyetunjitobiloba82@gmail.com" method="POST" data-aos="fade-left" data-aos-delay="300">
+            <input type="hidden" name="_subject" value="New Portfolio Contact Message" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_next" value="https://hunkymanie.vercel.app/" />
             <div className="form-group">
               <label htmlFor="name" className="form-label">Full Name</label>
               <input
@@ -367,8 +352,6 @@ function ContactSection() {
                 name="name"
                 className="form-control"
                 placeholder="What's your name?"
-                value={formData.name}
-                onChange={handleInputChange}
                 required
               />
             </div>
@@ -380,8 +363,6 @@ function ContactSection() {
                 name="email"
                 className="form-control"
                 placeholder="your@email.com"
-                value={formData.email}
-                onChange={handleInputChange}
                 required
               />
             </div>
@@ -392,8 +373,6 @@ function ContactSection() {
                 name="message"
                 className="form-control"
                 placeholder="Share your project ideas, collaboration opportunities, or just say hello! I'd love to hear from you."
-                value={formData.message}
-                onChange={handleInputChange}
                 required
               ></textarea>
             </div>
