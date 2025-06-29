@@ -937,11 +937,14 @@ p {
 /* Professional Skills */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 2rem;
   width: 100%;
   overflow-x: hidden;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .skill-category {
@@ -952,6 +955,9 @@ p {
   box-shadow: 0 2px 8px var(--shadow);
   width: 100%;
   max-width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
 }
 
 .skill-category h4 {
@@ -994,11 +1000,14 @@ p {
 /* Projects Grid Fix */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
   width: 100%;
   overflow-x: hidden;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .project-card {
@@ -1717,6 +1726,47 @@ textarea.form-control {
   user-select: none;
 }
 
+/* --- Large Screen Optimizations --- */
+@media (min-width: 1400px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 1200px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    max-width: 1600px;
+  }
+  
+  .content-wrapper {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    max-width: 1400px;
+  }
+  
+  .projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    max-width: 1800px;
+  }
+  
+  .content-wrapper {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+}
+
 /* --- Responsive Grid & Layout Fixes --- */
 
 @media (max-width: 1200px) {
@@ -1725,9 +1775,12 @@ textarea.form-control {
   }
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
   }
   .projects-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   .contact-grid {
     grid-template-columns: 1fr;
