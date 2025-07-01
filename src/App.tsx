@@ -4,6 +4,7 @@ import bluepegImg from './assets/bluepeg.png';
 import portfolioImg from './assets/porfolio.png';
 import ovarianImg from './assets/ovarian.png';
 import flowlendImg from './assets/FlowLend.png';
+import shoplyImg from './assets/Shoply.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -79,7 +80,6 @@ function HeroSection() {
   
   const roles = [
     'Frontend Developer',
-    'Solidity Engineer',
     'Blockchain Developer'
   ];
 
@@ -102,7 +102,8 @@ function HeroSection() {
           <span className="role-rotator">{currentRole}</span>
         </div>
         <h1 className="hero-title">
-          Hi, I'm <span className="highlight typing">Tobiloba Ayomide</span>
+          Hi, I'm <br />
+          <span className="highlight typing">Tobiloba Ayomide</span>
         </h1>
         <p className="hero-description">
           I craft seamless digital experiences that bridge beautiful design with powerful functionality. 
@@ -197,7 +198,6 @@ function AboutSection() {
              }}>
             Frontend developer with expertise in modern React development and blockchain smart contract programming. 
             I create beautiful, responsive user interfaces while building secure Solidity protocols and DeFi solutions. 
-            From interactive web applications to decentralized lending platforms, I bridge design and blockchain technology.
           </p>
         </div>
 
@@ -236,6 +236,16 @@ function ProjectsSection() {
     },
     {
       id: 2,
+      title: 'Shoply E-commerce Platform',
+      category: 'E-commerce & Web Development',
+      description: 'Professional e-commerce storefront built with Next.js 15, featuring comprehensive SEO optimization, analytics integration, accessibility features, and performance optimizations. Production-ready with Stripe integration, skeleton loading, and WCAG compliance.',
+      image: shoplyImg,
+      technologies: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'Shadcn UI', 'Stripe', 'Analytics'],
+      liveUrl: 'https://shoply-chi-six.vercel.app',
+      githubUrl: 'https://github.com/hunkymanie/Shoply'
+    },
+    {
+      id: 3,
       title: 'Bluepeg Industrial Solutions',
       category: 'Industrial Web Platform',
       description: 'Enterprise-grade website for industrial automation company featuring real-time data visualization, interactive service showcases, and seamless user experience across all devices.',
@@ -245,7 +255,7 @@ function ProjectsSection() {
       githubUrl: 'https://github.com/hunkymanie/bluepeg-'
     },
     {
-      id: 3,
+      id: 4,
       title: 'Modern Portfolio Website',
       category: 'Personal Brand',
       description: 'Responsive personal portfolio showcasing advanced React patterns, TypeScript implementation, and modern design principles. Features smooth animations and optimal performance.',
@@ -255,7 +265,7 @@ function ProjectsSection() {
       githubUrl: 'https://github.com/hunkymanie/portfolio'
     },
     {
-      id: 4,
+      id: 5,
       title: 'AI Cancer Detection System',
       category: 'Machine Learning & Healthcare',
       description: 'Academic research project utilizing Convolutional Neural Networks for automated ovarian cancer classification. Includes comprehensive documentation, model analysis, and installation instructions.',
@@ -274,7 +284,7 @@ function ProjectsSection() {
           <h2 className="section-title">Featured Projects</h2>
           <p className="section-description">
             Each project represents a unique challenge solved with innovative thinking, clean code, 
-            and user-centered design. From enterprise solutions to creative experiments.
+            and user-centered design.
           </p>
         </div>
 

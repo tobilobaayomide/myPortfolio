@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
 
 /* Reset and Base Styles */
 * {
@@ -627,6 +628,10 @@ p {
   margin-top: 0;
   position: relative;
   top: 0;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: 1.2em;
+  letter-spacing: 1px;
 }
 
 .hero-title .typing::after {
@@ -1000,7 +1005,7 @@ p {
 /* Projects Grid Fix */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   margin-top: 3rem;
   width: 100%;
@@ -1735,7 +1740,7 @@ textarea.form-control {
   }
   
   .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 2.5rem;
     max-width: 1600px;
   }
@@ -1755,7 +1760,7 @@ textarea.form-control {
   }
   
   .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     gap: 3rem;
     max-width: 1800px;
   }
@@ -1764,6 +1769,20 @@ textarea.form-control {
     max-width: 1800px;
     margin: 0 auto;
     padding: 0 3rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .projects-grid {
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 3.5rem;
+    max-width: 2000px;
+  }
+  
+  .content-wrapper {
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 0 4rem;
   }
 }
 
