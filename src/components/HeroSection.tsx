@@ -79,7 +79,12 @@ const HeroSection = () => {
             >
               <span>GET IN TOUCH</span>
             </a>
-            <a href="/myresume.pdf" className="btn-modern btn-outline-modern" download>
+            <a 
+              href="https://drive.google.com/file/d/1ol2mVMd_q0FZwMexCqySIoldbS2hB6vo/view?usp=sharing" 
+              className="btn-modern btn-outline-modern" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
               <span>VIEW RESUME</span>
             </a>
           </div>
