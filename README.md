@@ -1,50 +1,18 @@
-# Tobiloba Ayomide – Portfolio
-
-For a while, I’d been thinking about refining my portfolio. I finally took the courage to get started, and this repo is the result.
-## The Journey
-
-- I began by cloning my old portfolio ([see it here](https://hunkymanie.vercel.app)) into my workspace.
-- My first step was breaking down the big `App.tsx` file into smaller, focused components for each section (Navbar, Hero, About, Projects, Contact, Footer, Loading, and more). This made the code much more modular and easier to navigate.
-- I centralized all my project data in one file, so adding or updating projects is now a breeze.
-- I cleaned up the styles, made everything more responsive, and improved accessibility.
-- I added a branded loading screen for a smoother first impression.
-- I created a dedicated All Projects page and individual Project Details pages, so each project can have its own spotlight.
-- I updated all my social links, project URLs, and assets (like the favicon and avatar).
-- I made sure the contact form works and that my resume is easy to download.
-## What you’ll find here
-
-- A home page with a quick intro, my skills, and featured projects
-- A loading screen while the site loads
-- A full projects page with all my work, and individual pages for each project with more details (features, tech, links)
-## How to run it
-
-```bash
-git clone https://github.com/tobilobaayomide/myPortfolio.git
-cd myPortfolio
-npm install
-npm run dev
-```
-
-Then open http://localhost:5173 in your browser.
-## Tech
-
-- React + TypeScript
-
-
-Let me know if you want to add anything else!
-# Tobiloba Ayomide – Portfolio
-
-# Tobiloba Ayomide – Portfolio
+# Tobiloba Ayomide – Logic Behind My Portfolio
 
 For a long time, I wanted to refine my portfolio and make it truly mine. I finally took the courage to start, and this is the story of how I rebuilt it.
 
 ---
 
+
 ## 1. Breaking It All Down
 
 I started by cloning my old portfolio ([see it here](https://hunkymanie.vercel.app)) and decided the first thing to do was break the big `App.tsx` into smaller, reusable components. I wanted each section to be easy to work on and update.
 
+![All Projects Page Screenshot](public/allprojectspage.png)
+
 ---
+
 
 ## 2. The Navbar
 
@@ -52,15 +20,23 @@ I began with the navbar. My goal was minimalism, so I ditched my old logo and we
 
 ---
 
+
 ## 3. The Loading Effect
 
-Next, I wanted a little polish when the site loads. I added a loading screen that appears for 2 seconds before the main site shows up. (I’ll add a loading image here soon!) This gives a smooth first impression and a bit of personality.
+Next, I wanted a little polish when the site loads. I added a loading screen that appears for 2 seconds before the main site shows up. This gives a smooth first impression and a bit of personality.
+
+![Project Loading Screen](public/projectpage.png)
 
 ---
 
+
 ## 4. The Hero Section
 
-For the hero, I wanted something more personal. I used Cartonize to create a cartoon avatar of myself and added it to the hero section. To make it more dynamic, I added a typing effect for my role. Here’s a snippet of the code I used for the typing effect:
+For the hero, I wanted something more personal. I used Cartonize to create a cartoon avatar of myself and added it to the hero section. To make it more dynamic, I added a typing effect for my role.
+
+![Hero Section](public/herosection.png)
+
+Here’s a snippet of the code I used for the typing effect:
 
 ```js
 const roles = [
@@ -97,9 +73,12 @@ useEffect(() => {
 
 ---
 
+
 ## 5. The Hero & About Section
 
 After the hero, I wanted to give visitors a quick summary of who I am, so I added a short profile and my education details right on the page.
+
+![About Page](public/aboutpage.png)
 
 For my technical skills, I wanted something more lively than a static list. I built an automatic scrolling carousel of all the tech logos I use. Here’s a simplified version of the JavaScript for the infinite scrolling effect:
 
@@ -124,9 +103,12 @@ The CSS handles the animation, making the logos scroll smoothly across the scree
 
 ---
 
+
 ## 6. Projects Section & Details
 
 For my projects, I wanted something interactive and visually appealing. I used a card layout for each project, and just like my skills section, the projects also scroll automatically in a carousel. When you hover on a card, it reveals the category of the project—whether it’s SaaS, eCommerce, FinTech, or something else.
+
+![Project Section](public/projectsection.png)
 
 At the bottom, I added a “View all projects” button that leads to a dedicated page ([see it live](https://tobicode.netlify.app/projects)) showing every project in detail.
 
@@ -200,9 +182,12 @@ This way, adding a new project is as simple as updating one file, and the detail
 
 ---
 
+
 ## 7. The Footer & Personal Touches
 
 To wrap things up, I gave the footer a more standard and polished look. I integrated quick links for easy navigation, added my contact info, and made sure it fits the overall style of the site.
+
+![Footer](public/footer.png)
 
 This project was personal to me, so I went the extra mile: I used the cartoon avatar I created as my favicon, making the branding feel truly mine.
 
