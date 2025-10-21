@@ -9,7 +9,7 @@ For a long time, I wanted to refine my portfolio and make it truly mine. I final
 
 I started by cloning my old portfolio ([see it here](https://hunkymanie.vercel.app)) and decided the first thing to do was break the big `App.tsx` into smaller, reusable components. I wanted each section to be easy to work on and update.
 
-![All Projects Page Screenshot](public/allprojectspage.png)
+![All Projects Page Screenshot](./public/allprojectspage.png)
 
 ---
 
@@ -25,7 +25,7 @@ I began with the navbar. My goal was minimalism, so I ditched my old logo and we
 
 Next, I wanted a little polish when the site loads. I added a loading screen that appears for 2 seconds before the main site shows up. This gives a smooth first impression and a bit of personality.
 
-![Project Loading Screen](public/projectpage.png)
+![Project Loading Screen](./public/projectpage.png)
 
 ---
 
@@ -34,7 +34,7 @@ Next, I wanted a little polish when the site loads. I added a loading screen tha
 
 For the hero, I wanted something more personal. I used Cartonize to create a cartoon avatar of myself and added it to the hero section. To make it more dynamic, I added a typing effect for my role.
 
-![Hero Section](public/herosection.png)
+![Hero Section](./public/herosection.png)
 
 Here’s a snippet of the code I used for the typing effect:
 
@@ -78,7 +78,7 @@ useEffect(() => {
 
 After the hero, I wanted to give visitors a quick summary of who I am, so I added a short profile and my education details right on the page.
 
-![About Page](public/aboutpage.png)
+![About Page](./public/aboutpage.png)
 
 For my technical skills, I wanted something more lively than a static list. I built an automatic scrolling carousel of all the tech logos I use. Here’s a simplified version of the JavaScript for the infinite scrolling effect:
 
@@ -108,7 +108,7 @@ The CSS handles the animation, making the logos scroll smoothly across the scree
 
 For my projects, I wanted something interactive and visually appealing. I used a card layout for each project, and just like my skills section, the projects also scroll automatically in a carousel. When you hover on a card, it reveals the category of the project—whether it’s SaaS, eCommerce, FinTech, or something else.
 
-![Project Section](public/projectsection.png)
+![Project Section](./public/projectsection.png)
 
 At the bottom, I added a “View all projects” button that leads to a dedicated page ([see it live](https://tobicode.netlify.app/projects)) showing every project in detail.
 
@@ -187,7 +187,7 @@ This way, adding a new project is as simple as updating one file, and the detail
 
 To wrap things up, I gave the footer a more standard and polished look. I integrated quick links for easy navigation, added my contact info, and made sure it fits the overall style of the site.
 
-![Footer](public/footer.png)
+![Footer](./public/footer.png)
 
 This project was personal to me, so I went the extra mile: I used the cartoon avatar I created as my favicon, making the branding feel truly mine.
 
