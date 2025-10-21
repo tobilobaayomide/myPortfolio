@@ -7,9 +7,8 @@ For a long time, I wanted to refine my portfolio and make it truly mine. I final
 
 ## 1. Breaking It All Down
 
-I started by cloning my old portfolio ([see it here](https://hunkymanie.vercel.app)) and decided the first thing to do was break the big `App.tsx` into smaller, reusable components. I wanted each section to be easy to work on and update.
+I started by cloning my ([old portfolio](https://hunkymanie.vercel.app)) and decided the first thing to do was break the big `App.tsx` into smaller, reusable components for each sections. I wanted each section to be easy to work on and update.
 
-![All Projects Page Screenshot](./public/allprojectspage.png)
 
 ---
 
@@ -23,16 +22,64 @@ I began with the navbar. My goal was minimalism, so I ditched my old logo and we
 
 ## 3. The Loading Effect
 
-Next, I wanted a little polish when the site loads. I added a loading screen that appears for 2 seconds before the main site shows up. This gives a smooth first impression and a bit of personality.
 
-![Project Loading Screen](./public/projectpage.png)
+Next, I wanted a little polish when the site loads. I added a loading screen that appears for a few seconds before the main site shows up. This gives a smooth first impression and a bit of personality.
+
+![Project Loading Screen](./public/loading.png)
+
+Here’s a simplified version of the JavaScript (React) code for the loading effect:
+
+```js
+// App.tsx (main loading logic)
+import { useState, useEffect } from 'react';
+
+function App() {
+   const [isLoading, setIsLoading] = useState(true);
+
+   useEffect(() => {
+      // Set loading time (e.g., 2000 for 2s, 7000 for 7s)
+      const timer = setTimeout(() => {
+         setIsLoading(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+   }, []);
+
+   return (
+      <div>
+         {isLoading && <LoadingScreen />}
+         {/* ...rest of your app */}
+      </div>
+   );
+}
+
+// LoadingScreen.tsx (component)
+import './LoadingScreen.css';
+
+const LoadingScreen = () => (
+   <div className="loading-screen">
+      <div className="loading-content">
+         <div className="loading-logo">
+            <div className="loading-name">
+               <span className="name-white">tobi</span>
+               <span className="name-purple">loba</span>
+            </div>
+         </div>
+         <div className="loading-bar">
+            <div className="loading-progress"></div>
+         </div>
+      </div>
+   </div>
+);
+```
+
+The CSS animates the loading bar and centers the content. You can adjust the loading time in the `setTimeout` in `App.tsx`.
 
 ---
 
 
 ## 4. The Hero Section
 
-For the hero, I wanted something more personal. I used Cartonize to create a cartoon avatar of myself and added it to the hero section. To make it more dynamic, I added a typing effect for my role.
+For the hero, I wanted something more personal. I used ([Cartonize](https://www.cartoonize.net/avatar-maker/)) to create a cartoon avatar of myself and added it to the hero section. To make it more dynamic, I added a typing effect for my role.
 
 ![Hero Section](./public/herosection.png)
 
@@ -110,11 +157,11 @@ For my projects, I wanted something interactive and visually appealing. I used a
 
 ![Project Section](./public/projectsection.png)
 
-At the bottom, I added a “View all projects” button that leads to a dedicated page ([see it live](https://tobicode.netlify.app/projects)) showing every project in detail.
+At the bottom, I added a “View all projects” button that leads to a dedicated page ([see it live](https://tobicode.netlify.app/projects)) showing every projects.
 
-Each project card also has a “View Project” button. Clicking it takes you to a single project details page.
+Then I added a “View Project” button on each projects. Clicking it takes you to a single project details page.
 
-### How I Made It Modular
+![Each Project Section](./public/projectpage.png)
 
 Instead of creating a separate page for every project, I made a single, styled Project Details page. I store all my project info in a single file, `projectsData.ts`, and use the project’s ID to fetch the right data.
 
@@ -193,30 +240,17 @@ This project was personal to me, so I went the extra mile: I used the cartoon av
 
 ---
 
-## How to run it
 
-```bash
-git clone https://github.com/tobilobaayomide/myPortfolio.git
-cd myPortfolio
-npm install
-npm run dev
-```
 
-Then open http://localhost:5173 in your browser.
 
----
 
-## Tech
 
-- React + TypeScript
-- Vite
-- Custom CSS
+## Contact & Feedback
 
----
+If you have any corrections, suggestions, or want to reach out:
 
-## Contact
-
-If you want to reach out, just use the contact form or email me: oyetunjitobiloba82@gmail.com
+- Email me: oyetunjitobiloba82@gmail.com
+- Or create an issue on this repository
 
 ---
 
