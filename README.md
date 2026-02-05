@@ -7,7 +7,7 @@ For a long time, I wanted to refine my portfolio and make it truly mine. I final
 
 ## 1. Breaking It All Down
 
-I started by cloning my ([old portfolio](https://hunkymanie.vercel.app)) and decided the first thing to do was break the big `App.tsx` into smaller, reusable components for each sections. I wanted each section to be easy to work on and update.
+I started by cloning my [old portfolio](https://hunkymanie.vercel.app) and decided the first thing to do was break the big `App.tsx` into smaller, reusable components for each sections. I wanted each section to be easy to work on and update.
 
 
 ---
@@ -79,7 +79,7 @@ The CSS animates the loading bar and centers the content. You can adjust the loa
 
 ## 4. The Hero Section
 
-For the hero, I wanted something more personal. I used ([Cartonize](https://www.cartoonize.net/avatar-maker/)) to create a cartoon avatar of myself and added it to the hero section. To make it more dynamic, I added a typing effect for my role.
+For the hero, I wanted something more personal. I used [Cartonize](https://www.cartoonize.net/avatar-maker/) to create a cartoon avatar of myself and added it to the hero section. To make it more dynamic, I added a typing effect for my role.
 
 ![Hero Section](./public/herosection.png)
 
@@ -121,7 +121,7 @@ useEffect(() => {
 ---
 
 
-## 5. The Hero & About Section
+## 5. The About Section
 
 After the hero, I wanted to give visitors a quick summary of who I am, so I added a short profile and my education details right on the page.
 
@@ -157,7 +157,7 @@ For my projects, I wanted something interactive and visually appealing. I used a
 
 ![Project Section](./public/projectsection.png)
 
-At the bottom, I added a “View all projects” button that leads to a dedicated page ([see it live](https://tobicode.netlify.app/projects)) showing every projects.
+At the bottom, I added a “View all projects” button that leads to a dedicated page [see it live](https://tobicode.netlify.app/projects) showing every projects.
 
 Then I added a “View Project” button on each projects. Clicking it takes you to a single project details page.
 
@@ -249,9 +249,7 @@ This project was personal to me, so I went the extra mile: I used the cartoon av
 
 If you have any corrections, suggestions, or want to reach out:
 
-- Email me: oyetunjitobiloba82@gmail.com
+- [Email me](mailto:oyetunjitobiloba82@gmail.com)
 - Or create an issue on this repository
 
----
 
-Let me know if you want to add anything else!
