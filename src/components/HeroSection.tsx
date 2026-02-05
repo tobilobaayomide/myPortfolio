@@ -80,7 +80,7 @@ const HeroSection = () => {
               <span>GET IN TOUCH</span>
             </a>
             <a 
-              href="https://drive.google.com/file/d/1ol2mVMd_q0FZwMexCqySIoldbS2hB6vo/view?usp=sharing" 
+              href="https://drive.google.com/file/d/1oRqqdDvxzeybLTZzUa81HtMOXyM-GR9k/view?usp=sharing" 
               className="btn-modern btn-outline-modern" 
               target="_blank" 
               rel="noopener noreferrer"
