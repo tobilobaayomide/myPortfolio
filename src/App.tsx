@@ -18,9 +18,12 @@ function App() {
     return () => clearTimeout(timer);
   }, []);
 
+   if (isLoading) {
+    return <LoadingScreen />;
+  }
+
   return (
     <div className="App">
-      {isLoading && <LoadingScreen />}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<AllProjectsPage />} />
