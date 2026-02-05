@@ -79,7 +79,7 @@ export const projectsData: Project[] = [
       'Heroicons',
       'Turbopack'
     ],
-    liveUrl: '',
+    liveUrl: 'https://pay-mee.vercel.app/',
   githubUrl: 'https://github.com/tobilobaayomide/PayMee',
     features: [
       'Google OAuth sign-in via Supabase',
