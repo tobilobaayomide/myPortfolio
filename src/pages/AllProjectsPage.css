@@ -28,11 +28,13 @@
 }
 
 .compact-hero-container {
-  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;      
+  justify-content: center;  
+  text-align: center;      
   margin: 0 auto;
   padding: 0 2rem;
-  position: relative;
-  z-index: 1;
 }
 
 .hero-top-badge {
@@ -97,6 +99,21 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.compact-project-item {
+  border: 1px solid #eee;
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.compact-project-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
 /* Compact Project Item - Horizontal Layout */
