@@ -30,9 +30,9 @@
 .compact-hero-container {
   display: flex;
   flex-direction: column;
-  align-items: center;      
-  justify-content: center;  
-  text-align: center;      
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -171,11 +171,28 @@
   transition: all 0.4s ease;
 }
 
-.compact-project-item:hover .number-text {
-  background: linear-gradient(135deg, #9c7ef7, #764ba2);
+.compact-hero-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.85) 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  transform: scale(1.1);
+}
+
+.number-text {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, rgba(156, 126, 247, 0.3), rgba(118, 75, 162, 0.3));
+  -webkit-background-clip: text;
+  background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  transition: all 0.4s ease;
 }
 
 /* Project Image Block */
@@ -463,12 +480,16 @@
     z-index: 3;
   }
 
-  .number-text {
-    font-size: 2rem;
-    background: linear-gradient(135deg, rgba(156, 126, 247, 0.5), rgba(118, 75, 162, 0.5));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+ .number-text {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, rgba(156, 126, 247, 0.3), rgba(118, 75, 162, 0.3));
+  -webkit-background-clip: text;
+  background-clip: text; /* <-- Add this line */
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
 
   .image-wrapper-compact {
     height: 180px;
