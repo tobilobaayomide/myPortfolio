@@ -12,11 +12,15 @@ const AboutSection = () => {
     { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
     { name: 'Radix UI', icon: 'https://avatars.githubusercontent.com/u/75042455?s=200&v=4' },
     { name: 'Zustand', icon: 'https://raw.githubusercontent.com/pmndrs/zustand/main/docs/bear.jpg' },
+    { name: 'Framer Motion', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg'},
     
     // Backend & APIs
     { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+    { name: 'Express.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg' },
     { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
     { name: 'Supabase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg' },
+    { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original-wordmark.svg'},
+    
     
     // Web3 & Blockchain
     { name: 'Ethers.js', icon: 'https://docs.ethers.org/v5/static/logo.svg' },
@@ -28,7 +32,8 @@ const AboutSection = () => {
     { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg' },
     { name: 'Vite', icon: 'https://vitejs.dev/logo.svg' },
     { name: 'Vercel', icon: 'https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png' },
-    { name: 'Netlify', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg' }
+    { name: 'Netlify', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/netlify/netlify-original.svg' },
+    { name: 'Railway', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/railway/railway-original.svg'}
   ];
 
   // Duplicate skills for infinite loop effect
