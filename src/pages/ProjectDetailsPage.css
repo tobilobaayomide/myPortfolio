@@ -454,6 +454,7 @@
 .project-navigation {
   padding: 2rem 0 3rem;
   text-align: center;
+  margin-left: 250px
 }
 
 .view-all-projects-btn {
@@ -542,4 +543,8 @@
   .content-block {
     padding: 1.25rem;
   }
+}
+
+.project-navigation {
+  margin-left: 0px
 }
