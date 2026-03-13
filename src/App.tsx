@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import './App.css';
 import HomePage from './pages/HomePage';
 import AllProjectsPage from './pages/AllProjectsPage';
@@ -10,6 +12,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-quart',
+      offset: 100,
+      once: true,
+    });
+
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
