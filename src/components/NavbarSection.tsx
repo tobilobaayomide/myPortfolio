@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+const NAV_ITEMS = [
+  { id: 'home', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
+];
+
 const NavbarSection = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -8,25 +15,18 @@ const NavbarSection = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'contact', label: 'Contact' }
-  ];
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
       // Detect active section
-      const sections = navItems.map(item => document.getElementById(item.id));
+      const sections = NAV_ITEMS.map(item => document.getElementById(item.id));
       const scrollPosition = window.scrollY + 150;
 
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
         if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection(navItems[i].id);
+          setActiveSection(NAV_ITEMS[i].id);
           break;
         }
       }
@@ -72,7 +72,7 @@ const NavbarSection = () => {
       <nav className={`navbar-glass${isScrolled ? ' scrolled' : ''}`}>
         <div className="navbar-glass-content">
           <ul className="navbar-glass-links">
-            {navItems.map((item) => (
+            {NAV_ITEMS.map((item) => (
               <li key={item.id}>
                 <a 
                   href={`#${item.id}`} 
@@ -113,7 +113,7 @@ const NavbarSection = () => {
           ✕
         </button>
         <ul className="navbar-glass-mobile-links">
-          {navItems.map((item) => (
+          {NAV_ITEMS.map((item) => (
             <li key={item.id}>
               <a
                 href={`#${item.id}`}
