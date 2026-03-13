@@ -1155,6 +1155,7 @@ p {
   .hero-avatar-section {
     order: 1;
     margin-bottom: 1rem;
+    margin-left: 50px;
   }
 
   .hero-content-section {
@@ -1218,7 +1219,7 @@ p {
 }
 
 .about-container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -1571,7 +1572,7 @@ p {
 }
 
 .projects-container {
-  max-width: 1200px;
+  max-width: max-content;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -2424,7 +2425,7 @@ p {
 }
 
 .contact-container-modern {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
@@ -2681,6 +2682,12 @@ p {
   }
 }
 
+@media (max-width: 480px) {
+  .contact-container-modern {
+    margin: 10px;
+  }
+}
+
 /* ============================================
    MODERN FOOTER
    ============================================ */
@@ -2708,7 +2715,7 @@ p {
 }
 
 .footer-container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 0 2rem;
   position: relative;
@@ -2931,6 +2938,12 @@ p {
   }
   .footer-copyright {
     font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    margin: 10px;
   }
 }
 
