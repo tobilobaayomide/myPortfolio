@@ -61,9 +61,10 @@ const ContactSection = () => {
           {/* Right Side - Contact Form */}
           <form className="contact-form-modern" action="https://formsubmit.co/oyetunjitobiloba82@gmail.com" method="POST" data-aos="fade-left" data-aos-delay="200">
             <input type="hidden" name="_subject" value="New Portfolio Contact Message" />
-            <input type="hidden" name="_captcha" value="false" />
             <input type="hidden" name="_template" value="table" />
-            <input type="hidden" name="_next" value="https://hunkymanie.vercel.app/" />
+            <input type="hidden" name="_next" value="/" />
+            <input type="hidden" name="_captcha" value="true" />
+            <input type="text" name="_honey" tabIndex={-1} autoComplete="off" style={{ display: 'none' }} />
             
             <div className="form-row">
               <div className="form-group-modern">
@@ -74,6 +75,7 @@ const ContactSection = () => {
                   name="name"
                   className="form-input-modern"
                   placeholder="Your name"
+                  autoComplete="name"
                   required
                 />
               </div>
@@ -85,6 +87,7 @@ const ContactSection = () => {
                   name="email"
                   className="form-input-modern"
                   placeholder="your@email.com"
+                  autoComplete="email"
                   required
                 />
               </div>
