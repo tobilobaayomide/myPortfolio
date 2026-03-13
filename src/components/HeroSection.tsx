@@ -1,23 +1,19 @@
 import { useEffect, useState } from 'react';
 import myAvatar from '../assets/myAvatar.png';
 
+const ROLES = ['Frontend Developer', 'Blockchain Developer', 'Web3 Enthusiast'];
+
 const HeroSection = () => {
   const [currentRole, setCurrentRole] = useState('');
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  
-  const roles = [
-    'Frontend Developer',
-    'Blockchain Developer',
-    'Web3 Enthusiast'
-  ];
 
   useEffect(() => {
     const typingSpeed = isDeleting ? 50 : 100;
     const pauseTime = 2000;
 
     const timer = setTimeout(() => {
-      const fullRole = roles[roleIndex];
+      const fullRole = ROLES[roleIndex];
       
       if (!isDeleting) {
         // Typing forward
@@ -34,7 +30,7 @@ const HeroSection = () => {
         } else {
           // Move to next role
           setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % roles.length);
+          setRoleIndex((prev) => (prev + 1) % ROLES.length);
         }
       }
     }, typingSpeed);
