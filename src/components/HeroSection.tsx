@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import myAvatar from '../assets/myAvatar.png';
 
-const ROLES = ['Frontend Developer', 'Blockchain Developer', 'Web3 Enthusiast'];
+const ROLES = ['Frontend Engineer', 'Blockchain Developer', 'Web3 Enthusiast'];
 
 const HeroSection = () => {
   const [currentRole, setCurrentRole] = useState('');
@@ -76,7 +76,7 @@ const HeroSection = () => {
               <span>GET IN TOUCH</span>
             </a>
             <a 
-              href="https://drive.google.com/file/d/1oRqqdDvxzeybLTZzUa81HtMOXyM-GR9k/view?usp=sharing" 
+              href="https://drive.google.com/file/d/1m3WoHDrCsDfx4zfNN4pLOrW5hf05Jeux/view?usp=sharing" 
               className="btn-modern btn-outline-modern" 
               target="_blank" 
               rel="noopener noreferrer"
