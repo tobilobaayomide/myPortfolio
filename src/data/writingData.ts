@@ -15,8 +15,8 @@ export type WritingEntry = {
 export const WRITING_ENTRIES: WritingEntry[] = [
   {
     id: 'building-calm-dashboards',
-    title: 'Building dashboards that stay calm under pressure',
-    excerpt: 'A breakdown of hierarchy, grouping, and motion decisions that keep dense financial interfaces legible.',
+    title: 'Building ResumeeNow: The Engineering Behind an AI-Powered Resume Platform',
+    excerpt: 'How I built an AI-powered resume app with resume parsing, ATS audits, cover letter generation, and reliable PDF export.',
     publishedAt: 'April 2026',
     platform: 'DEV',
     readTime: '6 min read',
