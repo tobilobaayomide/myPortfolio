@@ -1,78 +1,203 @@
+import { useLayoutEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
-import { getAllProjects } from '../data/projectsData';
+import { getHomeProjects } from '../data/projectsData';
+import { getLeadSentence } from '../utils/text';
+
+gsap.registerPlugin(ScrollTrigger);
+
+const LinkArrowIcon = () => (
+  <svg
+    aria-hidden="true"
+    viewBox="0 0 20 20"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M6 14L14 6M8.5 6H14V11.5"
+      stroke="currentColor"
+      strokeWidth="1.7"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 const ProjectsSection = () => {
-  const projects = getAllProjects();
+  const projects = getHomeProjects();
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const introRef = useRef<HTMLDivElement | null>(null);
+  const leadRef = useRef<HTMLAnchorElement | null>(null);
+  const matrixRef = useRef<HTMLDivElement | null>(null);
+  const [leadProject, ...supportProjects] = projects;
 
-  // Duplicate projects for infinite scroll effect
-  const duplicatedProjects = [...projects, ...projects];
+  useLayoutEffect(() => {
+    if (
+      typeof window === 'undefined'
+      || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    const section = sectionRef.current;
+    const intro = introRef.current;
+    const lead = leadRef.current;
+    const matrix = matrixRef.current;
+
+    if (!section || !intro || !lead || !matrix) {
+      return;
+    }
+
+    const context = gsap.context(() => {
+      const introItems = intro.querySelectorAll(':scope > *');
+      const tiles = matrix.querySelectorAll('.system-tile');
+
+      gsap.set([...introItems, lead, ...tiles], { autoAlpha: 0 });
+
+      gsap.fromTo(
+        introItems,
+        { y: 26 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 76%',
+            once: true,
+          },
+        },
+      );
+
+      gsap.fromTo(
+        lead,
+        { x: -42, y: 30 },
+        {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          duration: 0.94,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: lead,
+            start: 'top 84%',
+            once: true,
+          },
+        },
+      );
+
+      gsap.fromTo(
+        tiles,
+        {
+          x: 22,
+          y: 36,
+        },
+        {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          duration: 0.85,
+          ease: 'power3.out',
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: matrix,
+            start: 'top 86%',
+            once: true,
+          },
+        },
+      );
+    }, section);
+
+    return () => {
+      context.revert();
+    };
+  }, []);
 
   return (
-    <section id="projects" className="projects-modern">
-      <div className="projects-container">
-        {/* Page Header */}
-        <div className="projects-header" data-aos="fade-up">
-          <span className="projects-label">PROJECTS</span>
-          <h2 className="projects-page-title">Featured Work</h2>
-          <p className="projects-intro">
-            A showcase of projects that highlight my passion for creating impactful digital products from modern web applications to blockchain-powered solutions.
-          </p>
-        </div>
-
-        {/* Projects Grid */}
-        <div className="projects-grid-modern">
-          <div className="projects-track">
-            {duplicatedProjects.map((project, index) => (
-            <div key={`${project.id}-${index}`} className="project-card-modern" data-aos="fade-up" data-aos-delay={index * 100}>
-              <div className="project-image-wrapper">
-                <img src={project.image} alt={project.title} className="project-image-modern" />
-                <div className="project-overlay">
-                  <span className="project-category-modern">{project.category}</span>
-                  {index === 0 && <span className="featured-badge">★ Featured</span>}
-                </div>
-              </div>
-              <div className="project-info">
-                <h3 className="project-title-modern">{project.title}</h3>
-                <p className="project-desc-modern">{project.description}</p>
-                <div className="project-tech-modern">
-                  {project.technologies.slice(0, 4).map((tech, techIndex) => (
-                    <span key={techIndex} className="tech-badge">{tech}</span>
-                  ))}
-                  {project.technologies.length > 4 && (
-                    <span className="tech-badge">+{project.technologies.length - 4}</span>
-                  )}
-                </div>
-                <div className="project-actions">
-                  <Link to={`/projects/${project.id}`} className="project-btn project-btn-view">
-                    View Project
-                  </Link>
-                  {project.liveUrl === 'demo' ? (
-                    <button 
-                      onClick={() => alert('This project requires local setup. Please check the GitHub repository for installation instructions and demo videos.')} 
-                      className="project-btn project-btn-primary"
-                    >
-                      Live Site
-                    </button>
-                  ) : (
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="project-btn project-btn-primary">
-                      Live Site
-                    </a>
-                  )}
-                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="project-btn project-btn-secondary">
-                    Code
-                  </a>
-                </div>
-              </div>
-            </div>
-            ))}
+    <section id="projects" className="systems-section" ref={sectionRef}>
+      <div className="site-container site-container--work systems-layout">
+        <div className="systems-intro" ref={introRef}>
+          <div className="systems-intro__header">
+            <h2 className="systems-intro__title section-title--sheen">Projects I&apos;ve shipped</h2>
           </div>
         </div>
 
-        {/* View All Projects Button */}
-        <div className="projects-view-all" data-aos="fade-up" data-aos-delay="200">
-          <Link to="/projects" className="view-all-btn">
-            <span>View All Projects</span>
+        {leadProject ? (
+          <Link
+            ref={leadRef}
+            to={`/projects/${leadProject.slug}`}
+            className="system-feature"
+          >
+            <div className="system-feature__meta">
+              <span>01</span>
+              <span>{leadProject.year}</span>
+              <span>{leadProject.category}</span>
+            </div>
+
+            <div className="system-feature__layout">
+              <div className="system-feature__copy">
+                <h3>{leadProject.title}</h3>
+                <p className="system-feature__summary">
+                  {leadProject.showcase?.blurb ?? getLeadSentence(leadProject.description)}
+                </p>
+              </div>
+
+              <div className="system-feature__details">
+                <p className="system-feature__note">
+                  {leadProject.showcase?.why ?? getLeadSentence(leadProject.description)}
+                </p>
+                <div className="system-feature__footer">
+                  <p className="system-feature__stack">
+                    {(leadProject.showcase?.stack ?? leadProject.technologies.slice(0, 3)).join(' • ')}
+                  </p>
+                  <div className="system-feature__action" aria-hidden="true">
+                    <span>View</span>
+                    <span className="system-feature__action-icon">
+                      <LinkArrowIcon />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </Link>
+        ) : null}
+
+        <div className="systems-grid" aria-label="Selected project matrix" ref={matrixRef}>
+          {supportProjects.map((project, index) => (
+            <Link
+              key={project.id}
+              to={`/projects/${project.slug}`}
+              className="system-tile"
+            >
+              <div className="system-tile__meta">
+                <span>{`0${index + 2}`}</span>
+                <span>{project.year}</span>
+                <span>{project.category}</span>
+              </div>
+
+              <h3>{project.title}</h3>
+
+              <p className="system-tile__summary">
+                {project.showcase?.blurb ?? getLeadSentence(project.description)}
+              </p>
+
+              <div className="system-tile__footer">
+                <p className="system-tile__stack">
+                  {(project.showcase?.stack ?? project.technologies.slice(0, 3)).join(' • ')}
+                </p>
+
+                <div className="system-tile__action" aria-hidden="true">
+                  <span>View</span>
+                  <span className="system-tile__action-icon">
+                    <LinkArrowIcon />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
