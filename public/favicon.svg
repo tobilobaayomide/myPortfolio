@@ -1,0 +1,12 @@
+<svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .brand-letter {
+      font-family: "Gochi Hand", "Caveat Brush", "Comic Sans MS", cursive;
+      font-weight: 700;
+      font-size: 92px;
+      text-rendering: geometricPrecision;
+    }
+  </style>
+  <text class="brand-letter" x="18" y="86" fill="black">T</text>
+  <text class="brand-letter" x="55" y="88" fill="#C89562">A</text>
+</svg>
