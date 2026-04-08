@@ -20,11 +20,8 @@ export const WRITING_ENTRIES: WritingEntry[] = [
     publishedAt: 'April 2026',
     platform: 'DEV',
     readTime: '6 min read',
-    url: 'https://dev.to/rahmannugar/owlyn-building-a-multimodal-agent-ecosystem-for-live-technical-interviews-and-real-time-assistance-15hg',
-    tags: ['Frontend', 'UX', 'React'],
-    // Optional manual override. DEV posts can resolve their cover image automatically from the post URL.
-    // coverImage: 'https://dev-to-uploads.s3.amazonaws.com/uploads/articles/your-cover-image.png',
-    // coverAlt: 'Cover image for Building dashboards that stay calm under pressure',
+    url: 'https://dev.to/hunkymanie/building-resumeenow-the-engineering-behind-an-ai-powered-resume-platform-535n',
+    tags: ['Frontend', 'Architecture', 'React'],
     featured: true,
   },
 ];
