@@ -1,68 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Gochi+Hand&family=Inter+Tight:wght@400;500;600;700;800&family=Syne:wght@500;600;700;800&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color-scheme: dark;
+  --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Syne', 'Inter Tight', sans-serif;
+  --font-mono: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mark: 'Caveat Brush', cursive;
+  --font-hand: 'Gochi Hand', cursive;
+  --color-bg: #090a0d;
+  --color-bg-rgb: 9 10 13;
+  --color-bg-elevated: #10131a;
+  --color-surface: #141922;
+  --color-surface-strong: #1b212b;
+  --color-surface-soft: rgba(20, 25, 34, 0.78);
+  --color-surface-float: rgba(255, 255, 255, 0.035);
+  --color-surface-smoke: rgba(240, 244, 248, 0.04);
+  --color-surface-wash: rgba(200, 149, 98, 0.08);
+  --color-text: #f3efe6;
+  --color-text-rgb: 243 239 230;
+  --color-muted-strong: #d1d7e0;
+  --color-muted: #98a1ad;
+  --color-border: #252c35;
+  --color-border-strong: #3a434e;
+  --color-accent: #c4ccd7;
+  --color-accent-strong: #e1e7ef;
+  --color-accent-soft: rgba(196, 204, 215, 0.12);
+  --color-brand: #c89562;
+  --color-brand-rgb: 200 149 98;
+  --color-brand-strong: #ddb183;
+  --color-brand-strong-rgb: 221 177 131;
+  --color-ink: #0b0d10;
+  --color-ink-rgb: 11 13 16;
+  --color-inverse: #f7f3ed;
+  --color-inverse-rgb: 247 243 237;
+  --color-sheen-rgb: 243 239 230;
+  --color-button-surface: rgba(255, 255, 255, 0.02);
+  --color-button-surface-strong: rgba(255, 255, 255, 0.06);
+  --color-button-border: rgba(243, 239, 230, 0.14);
+  --color-button-shadow: rgba(0, 0, 0, 0.18);
+  --color-action-icon-hover-bg: rgba(11, 13, 16, 0.96);
+  --color-action-icon-hover-fg: var(--color-brand);
+  --color-panel-bg: rgba(16, 19, 26, 0.84);
+  --color-backdrop: rgba(9, 10, 13, 0.22);
+  --color-modal-backdrop: rgba(9, 10, 13, 0.88);
+  --body-overlay-top: rgba(255, 255, 255, 0.025);
+  --body-overlay-bottom: rgba(0, 0, 0, 0.28);
+  --color-shadow: rgba(0, 0, 0, 0.42);
+  --nav-height: 5.4rem;
+  font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text);
+  background: var(--color-bg);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+:root[data-theme='light'] {
+  color-scheme: light;
+  --color-bg: #f5efe7;
+  --color-bg-rgb: 245 239 231;
+  --color-bg-elevated: #fcfaf6;
+  --color-surface: #f3ede4;
+  --color-surface-strong: #ebe3d8;
+  --color-surface-soft: rgba(255, 255, 255, 0.82);
+  --color-surface-float: rgba(17, 22, 28, 0.04);
+  --color-surface-smoke: rgba(17, 22, 28, 0.03);
+  --color-surface-wash: rgba(200, 149, 98, 0.12);
+  --color-text: #181d25;
+  --color-text-rgb: 24 29 37;
+  --color-muted-strong: #3f4856;
+  --color-muted: #697280;
+  --color-border: #d7cec2;
+  --color-border-strong: #bcae9d;
+  --color-accent: #556576;
+  --color-accent-strong: #2e3947;
+  --color-accent-soft: rgba(85, 101, 118, 0.12);
+  --color-ink: #11161c;
+  --color-ink-rgb: 17 22 28;
+  --color-inverse: #fbf7f0;
+  --color-inverse-rgb: 251 247 240;
+  --color-sheen-rgb: 50 60 74;
+  --color-button-surface: rgba(255, 255, 255, 0.66);
+  --color-button-surface-strong: rgba(255, 255, 255, 0.9);
+  --color-button-border: rgba(17, 22, 28, 0.14);
+  --color-button-shadow: rgba(17, 22, 28, 0.08);
+  --color-action-icon-hover-bg: var(--color-inverse);
+  --color-action-icon-hover-fg: var(--color-ink);
+  --color-panel-bg: rgba(255, 255, 255, 0.84);
+  --color-backdrop: rgba(17, 22, 28, 0.16);
+  --color-modal-backdrop: rgba(17, 22, 28, 0.72);
+  --body-overlay-top: rgba(255, 255, 255, 0.72);
+  --body-overlay-bottom: rgba(207, 194, 173, 0.34);
+  --color-shadow: rgba(15, 19, 28, 0.12);
 }
-a:hover {
-  color: #535bf2;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--color-bg);
+  background-image:
+    linear-gradient(180deg, var(--body-overlay-top), rgba(255, 255, 255, 0) 14rem),
+    linear-gradient(180deg, rgba(0, 0, 0, 0), var(--body-overlay-bottom));
+  background-size: auto, auto;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  letter-spacing: -0.012em;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+body.menu-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  background: none;
+  color: inherit;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+input,
+textarea {
+  color: inherit;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+::selection {
+  background: rgba(180, 192, 207, 0.18);
+  color: var(--color-text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

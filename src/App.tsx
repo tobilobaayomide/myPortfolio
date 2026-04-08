@@ -1,42 +1,52 @@
-import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { useLayoutEffect, useState } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
-import AllProjectsPage from './pages/AllProjectsPage';
 import ProjectDetailsPage from './pages/ProjectDetailsPage';
-import LoadingScreen from './components/LoadingScreen';
+import WritingPage from './pages/WritingPage';
+import { getInitialTheme, THEME_STORAGE_KEY, type Theme } from './theme';
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
 
-  useEffect(() => {
-    AOS.init({
-      duration: 800,
-      easing: 'ease-out-quart',
-      offset: 100,
-      once: true,
-    });
-
-    // Simulate loading time
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-   if (isLoading) {
-    return <LoadingScreen />;
-  }
+  useLayoutEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+  }, [theme]);
 
   return (
-    <div className="App">
+    <div className="app-shell">
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/projects" element={<AllProjectsPage />} />
-        <Route path="/projects/:id" element={<ProjectDetailsPage />} />
+        <Route
+          path="/"
+          element={(
+            <HomePage
+              theme={theme}
+              onToggleTheme={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
+            />
+          )}
+        />
+        <Route path="/projects" element={<Navigate to="/#projects" replace />} />
+        <Route
+          path="/writing"
+          element={(
+            <WritingPage
+              theme={theme}
+              onToggleTheme={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
+            />
+          )}
+        />
+        <Route
+          path="/projects/:id"
+          element={(
+            <ProjectDetailsPage
+              theme={theme}
+              onToggleTheme={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
+            />
+          )}
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   );

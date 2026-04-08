@@ -1,105 +1,95 @@
-const AboutSection = () => {
-  const skills = [
-    // Frontend Core
-    { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
-    { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
-    { name: 'Sass', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg' },
-    { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-    { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
-    { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-    { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original-wordmark.svg' },
-    { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg' },
-    { name: 'Bootstrap', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg' },
-    { name: 'Radix UI', icon: 'https://avatars.githubusercontent.com/u/75042455?s=200&v=4' },
-    { name: 'Zustand', icon: 'https://raw.githubusercontent.com/pmndrs/zustand/main/docs/bear.jpg' },
-    { name: 'Framer Motion', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/framermotion/framermotion-original.svg'},
-    
-    // Backend & APIs
-    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-    { name: 'Express.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original.svg' },
-    { name: 'Firebase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg' },
-    { name: 'Supabase', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg' },
-    { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original-wordmark.svg'},
-    
-    
-    // Web3 & Blockchain
-    { name: 'Ethers.js', icon: 'https://docs.ethers.org/v5/static/logo.svg' },
-    { name: 'Hardhat', icon: 'https://hardhat.org/card.jpg' },
-    { name: 'Wagmi', icon: 'https://wagmi.sh/logo-dark.svg' },
-    
-    // Tools & Workflow (using white/plain versions for dark logos)
-    { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-    { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg' },
-    { name: 'Vite', icon: 'https://vitejs.dev/logo.svg' },
-    { name: 'Vercel', icon: 'https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png' },
-    { name: 'Netlify', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/netlify/netlify-original.svg' },
-    { name: 'Railway', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/railway/railway-original.svg'}
-  ];
+import { useLayoutEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { METHOD_APPROACH, METHOD_PRINCIPLES } from '../data/siteContent';
 
-  // Duplicate skills for infinite loop effect
-  const duplicatedSkills = [...skills, ...skills];
+gsap.registerPlugin(ScrollTrigger);
+
+const AboutSection = () => {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const introRef = useRef<HTMLDivElement | null>(null);
+  const boardRef = useRef<HTMLDivElement | null>(null);
+
+  useLayoutEffect(() => {
+    if (
+      typeof window === 'undefined'
+      || window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return;
+    }
+
+    const section = sectionRef.current;
+    const intro = introRef.current;
+    const board = boardRef.current;
+
+    if (!section || !intro || !board) {
+      return;
+    }
+
+    const context = gsap.context(() => {
+      const introItems = intro.querySelectorAll(':scope > *');
+      const principles = board.querySelectorAll('.method-principle');
+
+      gsap.set(introItems, {
+        autoAlpha: 0,
+        y: 24,
+      });
+
+      gsap.set(principles, {
+        autoAlpha: 0,
+        y: 34,
+        x: (index) => (index % 2 === 0 ? -14 : 14),
+      });
+
+      gsap.timeline({
+        defaults: {
+          ease: 'power3.out',
+        },
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 78%',
+          once: true,
+        },
+      })
+        .to(introItems, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.78,
+          stagger: 0.1,
+        })
+        .to(principles, {
+          autoAlpha: 1,
+          x: 0,
+          y: 0,
+          duration: 0.72,
+          stagger: 0.12,
+        }, 0.2);
+    }, section);
+
+    return () => context.revert();
+  }, []);
 
   return (
-    <section id="about" className="about-modern">
-      <div className="about-container">
-        {/* Page Header */}
-        <div className="about-header" data-aos="fade-up">
-          <h2 className="about-page-title">About Me</h2>
+    <section id="about" className="method-section" ref={sectionRef}>
+      <div className="site-container site-container--work method-layout">
+        <div className="method-intro" ref={introRef}>
+          <p className="section-label">{METHOD_APPROACH.label}</p>
+          <div className="method-intro__body">
+            <h2 className="section-title--sheen">{METHOD_APPROACH.title}</h2>
+            <p>{METHOD_APPROACH.summary}</p>
+          </div>
         </div>
 
-        {/* Grid Layout - Who I Am (Left) & Education (Right) */}
-        <div className="about-grid">
-          {/* Who I Am - Left */}
-          <div className="about-intro" data-aos="fade-right">
-            <span className="about-label">WHO I AM</span>
-            <h3 className="about-section-title">
-              Turning Ideas Into Interactive Realities
-            </h3>
-            <p className="about-description">
-              I’m a Computer Science graduate with a knack for turning ideas into interactive web and blockchain products. I enjoy that sweet spot between design and development where visuals meet logic and creativity meets performance. Always curious, always learning, I’m driven by the thrill of solving problems and building tools that people actually enjoy using.
-            </p>
-          </div>
-
-          {/* Vertical Divider */}
-          <div className="about-divider"></div>
-
-          {/* Education - Right */}
-          <div className="about-education" data-aos="fade-left">
-            <span className="about-label">EDUCATION</span>
-            <h3 className="about-section-title">Academic Background</h3>
-            <div className="education-info">
-              <svg className="education-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 14L21 9L12 4L3 9L12 14Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 14L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M7 11.5V16.5C7 16.5 9 19 12 19C15 19 17 16.5 17 16.5V11.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-              <div className="education-details">
-                <p className="education-degree">Bachelor of Science</p>
-                <p className="education-major">Computer Science</p>
-                <p className="education-school">University of Ilorin • 2019 - 2024</p>
+        <div className="method-board" ref={boardRef}>
+          {METHOD_PRINCIPLES.map((principle, index) => (
+            <article key={principle.title} className="method-principle">
+              <p className="method-principle__index">{`0${index + 1}`}</p>
+              <div className="method-principle__main">
+                <h3>{principle.title}</h3>
+                <p>{principle.description}</p>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Tech Skills - Full Width Below */}
-        <div className="about-skills" data-aos="fade-up" data-aos-delay="200">
-          <span className="about-label">Technical Skills</span>
-          <h3 className="skills-title">Tools & Technologies I Build With</h3>
-          
-          {/* Animated Skills Carousel */}
-          <div className="skills-carousel">
-            <div className="skills-track">
-              {duplicatedSkills.map((skill, index) => (
-                <div key={index} className="skill-card">
-                  <div className="skill-logo-wrapper">
-                    <img src={skill.icon} alt={skill.name} className="skill-logo" />
-                  </div>
-                  <span className="skill-name">{skill.name}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
