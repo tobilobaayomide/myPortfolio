@@ -19,7 +19,7 @@ export const WRITING_ENTRIES: WritingEntry[] = [
     excerpt: 'How I built an AI-powered resume app with resume parsing, ATS audits, cover letter generation, and reliable PDF export.',
     publishedAt: 'April 2026',
     platform: 'DEV',
-    readTime: '6 min read',
+    readTime: '9 min read',
     url: 'https://dev.to/hunkymanie/building-resumeenow-the-engineering-behind-an-ai-powered-resume-platform-535n',
     tags: ['Frontend', 'Architecture', 'React'],
     featured: true,
