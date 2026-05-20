@@ -292,7 +292,13 @@ const ProjectDetailsPage = ({ theme, onToggleTheme }: ProjectDetailsPageProps) =
       : null,
   ].filter((p): p is { label: string; title: string; copy: string } => Boolean(p));
 
-  const statusLabel = project.liveUrl === 'demo' ? 'Private demo' : 'Live';
+  const launchStatus = project.launchStatus ?? 'live';
+  const statusLabel = launchStatus === 'private-demo'
+    ? 'Private demo'
+    : launchStatus === 'development'
+      ? 'Development'
+      : 'Live';
+  const canVisitLiveSite = launchStatus === 'live' && Boolean(project.liveUrl);
 
   const showcaseFrames = [
     { id: 'lead', className: 'case-study-showcase__tile case-study-showcase__tile--lead', alt: `${project.title} primary interface` },
@@ -336,7 +342,7 @@ const ProjectDetailsPage = ({ theme, onToggleTheme }: ProjectDetailsPageProps) =
                 <h1 className={heroTitleClassName} ref={heroTitleRef}>{project.title}</h1>
                 <p className="case-study-hero__summary">{heroSummary}</p>
                 <div className="case-study-hero__actions">
-                  {project.liveUrl !== 'demo' && (
+                  {canVisitLiveSite && (
                     <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="action-pill case-study-hero__action">
                       <span>Visit Live Site</span>
                       <span className="action-pill__icon"><LinkArrowIcon /></span>

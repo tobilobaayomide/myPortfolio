@@ -24,4 +24,15 @@ export const WRITING_ENTRIES: WritingEntry[] = [
     tags: ['Frontend', 'Architecture', 'React'],
     featured: true,
   },
+    {
+    id: 'rethinking-trust-boundaries',
+    title: 'Rethinking Trust Boundaries in Auth and Billing Flows',
+    excerpt: 'I recently reworked my application so billing and authentication flows no longer depend too heavily on browser-trusted state.',
+    publishedAt: 'May 2026',
+    platform: 'DEV',
+    readTime: '6 min read',
+    url: 'https://dev.to/hunkymanie/rethinking-trust-boundaries-in-auth-and-billing-flows-3gao',
+    tags: ['Backend', 'Architecture', 'Security'],
+    featured: true,
+  },
 ];

@@ -25,6 +25,10 @@
   gap: 2rem;
 }
 
+.writing-collection__inner {
+  gap: 0;
+}
+
 .writing-hero__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(17rem, 0.44fr);
@@ -41,14 +45,12 @@
 
 .writing-hero__copy h1,
 .writing-feature__copy h2,
-.writing-card h2,
 .writing-empty__panel h2,
 .writing-empty__panel p,
 .writing-hero__summary,
 .writing-hero__stat p,
 .writing-feature__excerpt,
-.writing-archive__eyebrow,
-.writing-card__excerpt {
+.writing-archive__eyebrow {
   margin: 0;
 }
 
@@ -120,7 +122,7 @@
 }
 
 .writing-feature__meta,
-.writing-card__meta {
+.writing-feature__meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.45rem 0.75rem;
@@ -133,7 +135,7 @@
 }
 
 .writing-feature__meta span + span::before,
-.writing-card__meta span + span::before {
+.writing-feature__meta span + span::before {
   content: '/';
   margin-right: 0.9rem;
   color: rgb(var(--color-text-rgb) / 0.24);
@@ -162,7 +164,7 @@
 }
 
 .writing-feature__excerpt {
-  max-width: 32ch;
+  max-width: 58ch;
   color: var(--color-muted-strong);
   font-size: clamp(1.02rem, 1.2vw, 1.16rem);
   font-weight: 500;
@@ -268,74 +270,20 @@
   letter-spacing: -0.015em;
 }
 
-.writing-grid {
+.writing-archive__list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-bottom: 1px solid var(--color-border);
+  gap: 0;
 }
 
-.writing-card {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: grid;
-  gap: 0.95rem;
-  padding: 1.35rem clamp(1.2rem, 3vw, 2rem) 1.55rem;
-  color: var(--color-text);
-  min-width: 0;
+.writing-collection__inner > .writing-feature + .writing-archive {
+  margin-top: -1px;
 }
 
-.writing-card:nth-child(odd) {
-  border-top: 1px solid var(--color-border);
-  border-right: 1px solid var(--color-border);
+.writing-archive__list .writing-feature + .writing-feature {
+  margin-top: -1px;
 }
 
-.writing-card:nth-child(even) {
-  border-top: 1px solid var(--color-border);
-}
-
-.writing-grid > .writing-card:first-child,
-.writing-grid > .writing-card:nth-child(2) {
-  border-top: 0;
-}
-
-.writing-card h2 {
-  max-width: 14ch;
-  font-family: var(--font-display);
-  font-size: clamp(1.7rem, 3vw, 2.45rem);
-  font-weight: 700;
-  line-height: 0.94;
-  letter-spacing: -0.055em;
-}
-
-.writing-card__excerpt {
-  max-width: 34rem;
-  color: var(--color-muted-strong);
-  font-size: 0.98rem;
-  line-height: 1.56;
-  letter-spacing: -0.018em;
-}
-
-.writing-card__footer {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 0.35rem;
-}
-
-.writing-card__action {
-  flex-shrink: 0;
-  color: var(--color-accent);
-}
-
-.writing-card__action svg {
-  width: 0.95rem;
-  height: 0.95rem;
-}
-
-.writing-feature__link:focus-visible,
-.writing-card:focus-visible {
+.writing-feature__link:focus-visible {
   outline: 2px solid rgb(var(--color-brand-rgb) / 0.44);
   outline-offset: 0.35rem;
 }
@@ -397,8 +345,7 @@
   }
 
   .writing-hero__grid,
-  .writing-feature__body,
-  .writing-grid {
+  .writing-feature__body {
     grid-template-columns: 1fr;
   }
 
@@ -415,20 +362,7 @@
     aspect-ratio: 2.1 / 1;
   }
 
-  .writing-card:nth-child(odd) {
-    border-right: 0;
-  }
-
-  .writing-grid > .writing-card:nth-child(2) {
-    border-top: 1px solid var(--color-border);
-  }
-
   .writing-archive__header {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .writing-card__footer {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -449,8 +383,7 @@
   }
 
   .writing-hero__summary,
-  .writing-feature__excerpt,
-  .writing-card__excerpt {
+  .writing-feature__excerpt {
     font-size: 0.94rem;
     line-height: 1.65;
   }
@@ -460,20 +393,16 @@
   }
 
   .writing-feature__meta,
-  .writing-card__meta {
+.writing-feature__meta {
     gap: 0.4rem 0.55rem;
   }
 
   .writing-feature__meta span + span::before,
-  .writing-card__meta span + span::before {
+.writing-feature__meta span + span::before {
     margin-right: 0.65rem;
   }
 
   .writing-empty__panel {
     padding: 1.6rem;
-  }
-
-  .writing-card {
-    padding: 1.1rem 0 1.35rem;
   }
 }
