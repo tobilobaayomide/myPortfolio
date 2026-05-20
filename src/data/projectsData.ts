@@ -49,7 +49,8 @@ export interface Project {
   galleryImages?: string[];
   galleryLabels?: string[];
   technologies: string[];
-  liveUrl: string;
+  liveUrl?: string;
+  launchStatus?: 'live' | 'private-demo' | 'development';
   githubUrl: string;
   features?: string[]; 
   challenges?: string;
@@ -326,7 +327,7 @@ export const projectsData: Project[] = [
     "React Slick",
     "React Swipeable",
   ],
-  liveUrl: "https://your-arthub.com",
+  launchStatus: 'development',
   githubUrl: "https://github.com/tobilobaayomide/art--hub",
   features: [
     "Editorial-style homepage with animated hero carousels for desktop and mobile",
@@ -385,7 +386,7 @@ export const projectsData: Project[] = [
     "locomo tive-scroll",
     "react-fast-marquee"
   ],
-    liveUrl: "https://fashionistaaa.com",
+  launchStatus: 'development',
   githubUrl: "https://github.com/tobilobaayomide/fashionista",
   features: [
     "Immersive luxury editorial hero",
